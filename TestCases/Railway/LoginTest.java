@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import Constant.Constant;
+import ReportHelper.ReportHelper;
 
 public class LoginTest extends TestBase {
 
@@ -17,13 +18,11 @@ public class LoginTest extends TestBase {
 		try {
 			// Start test. Mention test script name
 			test = reports.startTest("TC01", "Navigate to QA Railway site & Generate HTML Report");
-
 			test.log(LogStatus.INFO, "Navigate to QA Railway site");
-			new HomePage().open();
 
 			// Take screen shot of page
 			filePath = Constant.PASSED_SCREEN_SHOT_PATH;
-			takeScreenShot(filePath);
+			ReportHelper.takeScreenShot(filePath);
 			// Attach screen shot in HTML report
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(filePath));
 
@@ -33,7 +32,7 @@ public class LoginTest extends TestBase {
 
 			// Take screen shot of page
 			filePath = Constant.FAILED_SCREEN_SHOT_PATH;
-			takeScreenShot(filePath);
+			ReportHelper.takeScreenShot(filePath);
 			// Attach screen shot in HTML report
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(filePath));
 

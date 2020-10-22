@@ -1,10 +1,6 @@
 package Railway;
 
-interface ContactInterface {
-
-}
-
-public class ContactPage extends GeneralPage implements ContactInterface {
+public class ContactPage extends GeneralPage {
 
 	// Locators
 

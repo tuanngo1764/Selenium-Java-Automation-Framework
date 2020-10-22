@@ -1,10 +1,6 @@
 package Railway;
 
-interface SuccessfulRegisteringInterface {
-
-}
-
-public class SuccessfulRegisteringPage extends GeneralPage implements SuccessfulRegisteringInterface {
+public class SuccessfulRegisteringPage extends GeneralPage {
 
 	// Locators
 

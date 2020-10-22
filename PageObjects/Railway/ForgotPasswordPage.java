@@ -3,22 +3,15 @@ package Railway;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Common.Utilities;
 import Constant.Constant;
-
-interface ForgotPasswordInterface {
-	void fillForgotPasswordForm(String email);
-
-	ForgotPasswordPage clickSendInstructions();
-
-	ForgotPasswordPage sendInstructions(String email);
-}
+import Railway.Interface.ForgotPasswordInterface;
+import SeleniumHelper.SeleniumHelper;
 
 public class ForgotPasswordPage extends GeneralPage implements ForgotPasswordInterface {
 
 	// Locators
-	private final By _txtEmail = By.xpath("");
-	private final By _btnSendInstructions = By.xpath("");
+	private final By _txtEmail = By.xpath("//input[@id='email']");
+	private final By _btnSendInstructions = By.xpath("//input[@value='Send Instructions']");
 
 	// Elements
 	protected WebElement getTxtEmail() {
@@ -33,12 +26,12 @@ public class ForgotPasswordPage extends GeneralPage implements ForgotPasswordInt
 	@Override
 	public void fillForgotPasswordForm(String email) {
 		// Fill register form
-		Utilities.sendkeys(this.getTxtEmail(), email);
+		SeleniumHelper.sendkeys(this.getTxtEmail(), email);
 	}
 
 	@Override
 	public ForgotPasswordPage clickSendInstructions() {
-		Utilities.click(_btnSendInstructions, this.getBtnSendInstructions());
+		SeleniumHelper.click(_btnSendInstructions, this.getBtnSendInstructions());
 		return this;
 	}
 

@@ -3,16 +3,9 @@ package Railway;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Common.Utilities;
 import Constant.Constant;
-
-interface ChangePasswordInterface {
-	void fillChangePasswordForm(String password, String newPassword, String confirmPassword);
-
-	ChangePasswordPage clickBtnRegister();
-
-	ChangePasswordPage changePassword(String password, String newPassword, String confirmPassword);
-}
+import Railway.Interface.ChangePasswordInterface;
+import SeleniumHelper.SeleniumHelper;
 
 public class ChangePasswordPage extends GeneralPage implements ChangePasswordInterface {
 
@@ -43,14 +36,14 @@ public class ChangePasswordPage extends GeneralPage implements ChangePasswordInt
 	@Override
 	public void fillChangePasswordForm(String password, String newPassword, String confirmPassword) {
 		// Fill register form
-		Utilities.sendkeys(this.getTxtCurrentPassword(), password);
-		Utilities.sendkeys(this.getTxtNewPassword(), newPassword);
-		Utilities.sendkeys(this.getTxtConfirmPassword(), confirmPassword);
+		SeleniumHelper.sendkeys(this.getTxtCurrentPassword(), password);
+		SeleniumHelper.sendkeys(this.getTxtNewPassword(), newPassword);
+		SeleniumHelper.sendkeys(this.getTxtConfirmPassword(), confirmPassword);
 	}
 
 	@Override
 	public ChangePasswordPage clickBtnRegister() {
-		Utilities.click(_btnChangePassword, this.getBtnChangePassword());
+		SeleniumHelper.click(_btnChangePassword, this.getBtnChangePassword());
 		return this;
 	}
 

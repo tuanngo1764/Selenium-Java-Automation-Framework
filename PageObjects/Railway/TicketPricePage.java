@@ -5,16 +5,11 @@ import org.openqa.selenium.WebElement;
 
 import Constant.Constant;
 
-interface TicketPriceInterface {
-	String getTicketPriceHeader();
-
-	String getTicketPrice(String seatype);
-}
-
-public class TicketPricePage extends GeneralPage implements TicketPriceInterface {
+public class TicketPricePage extends GeneralPage {
 
 	// Locators
-	private final By _lblTicketPriceHeader = By.xpath("");
+	private final By _lblTicketPriceHeader = By
+			.xpath("//table[@class='MyTable MedTable']//tr[@class='TableSmallHeader']/th");
 
 	// Elements
 	protected WebElement getLblTicketPriceHeader() {
@@ -22,12 +17,10 @@ public class TicketPricePage extends GeneralPage implements TicketPriceInterface
 	}
 
 	// Methods
-	@Override
 	public String getTicketPriceHeader() {
 		return this.getLblTicketPriceHeader().getText();
 	}
 
-	@Override
 	public String getTicketPrice(String seatype) {
 		By _ticketPrice = By.xpath(
 				"//table[@class=\"MyTable MedTable\"]//tr//th[contains(.,\"Price \")]/..//td[count(//table//tr//td[.=\""

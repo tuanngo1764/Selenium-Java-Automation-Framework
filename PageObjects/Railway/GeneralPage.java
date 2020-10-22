@@ -6,52 +6,24 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Common.Utilities;
 import Constant.Constant;
+import SeleniumHelper.SeleniumHelper;
 
-interface GeneralInterface {
-	HomePage logout();
-
-	LoginPage gotoLoginPage();
-
-	HomePage goToHomePage();
-
-	ContactPage goToContactPage();
-
-	RegisterPage goToRegisterPage();
-
-	ForgotPasswordPage goToForgotPasswordPage();
-
-	ChangePasswordPage goToChangePasswordPage();
-
-	TimeTablePage goToTimeTablePage();
-
-	TicketPricePage goToTicketPricePage();
-
-	BookTicketPage goToBookTicketPage();
-
-	MyTicketPage goToMyTicketPage();
-
-	void waitForLoadingIconToDisappear();
-
-	String getWelcomeMessage();
-}
-
-public abstract class GeneralPage extends Utilities implements GeneralInterface {
+public class GeneralPage {
 
 	// Locators
-	private final By _tabLogout = By.xpath("");
-	private final By _tabLogin = By.xpath("");
-	private final By _tabHome = By.xpath("");
-	private final By _tabContact = By.xpath("");
-	private final By _tabRegister = By.xpath("");
-	private final By _tabForgotPassword = By.xpath("");
-	private final By _tabChangePassword = By.xpath("");
-	private final By _tabTimeTable = By.xpath("");
-	private final By _tabTicketPrice = By.xpath("");
-	private final By _tabBookTicket = By.xpath("");
-	private final By _tabMyTicket = By.xpath("");
-	private final By _lblWelcomeMessage = By.xpath("");
+	private final By _tabLogout = By.xpath("//div[@id='menu']//a[@href='/Account/Logout']");
+	private final By _tabLogin = By.xpath("//div[@id='menu']//a[@href='/Account/Login.cshtml']");
+	private final By _tabHome = By.xpath("//div[@id='menu']//a[@href='../']");
+	private final By _tabContact = By.xpath("//div[@id='menu']//a[@href='/Page/Contact.cshtml']");
+	private final By _tabRegister = By.xpath("//div[@id='menu']//a[@href='/Account/Register.cshtml']");
+
+	private final By _tabChangePassword = By.xpath("//div[@id='menu']//a[@href='/Account/ChangePassword.cshtml']");
+	private final By _tabTimeTable = By.xpath("//div[@id='menu']//a[@href='TrainTimeListPage.cshtml']");
+	private final By _tabTicketPrice = By.xpath("//div[@id='menu']//a[@href='/Page/TrainPriceListPage.cshtml']");
+	private final By _tabBookTicket = By.xpath("//div[@id='menu']//a[@href='/Page/BookTicketPage.cshtml']");
+	private final By _tabMyTicket = By.xpath("//div[@id='menu']//a[@href='/Page/ManageTicket.cshtml']");
+	private final By _lblWelcomeMessage = By.xpath("//div[@class='account']/strong");
 	private final By _loadingIcon = By.xpath("");
 
 	// Elements
@@ -73,10 +45,6 @@ public abstract class GeneralPage extends Utilities implements GeneralInterface 
 
 	protected WebElement getTabRegister() {
 		return Constant.WEBDRIVER.findElement(_tabRegister);
-	}
-
-	protected WebElement getTabForgotPassword() {
-		return Constant.WEBDRIVER.findElement(_tabForgotPassword);
 	}
 
 	protected WebElement getTabChangePassword() {
@@ -113,57 +81,52 @@ public abstract class GeneralPage extends Utilities implements GeneralInterface 
 	}
 
 	public HomePage logout() {
-		Utilities.click(_tabLogout, this.getTabLogout());
+		SeleniumHelper.click(_tabLogout, this.getTabLogout());
 		return new HomePage();
 	}
 
-	public LoginPage gotoLoginPage() {
-		Utilities.click(_tabLogin, this.getTabLogin());
+	public LoginPage goToLoginPage() {
+		SeleniumHelper.click(_tabLogin, this.getTabLogin());
 		return new LoginPage();
 	}
 
 	public HomePage goToHomePage() {
-		Utilities.click(_tabHome, this.getTabHome());
+		SeleniumHelper.click(_tabHome, this.getTabHome());
 		return new HomePage();
 	}
 
 	public ContactPage goToContactPage() {
-		Utilities.click(_tabContact, this.getTabContact());
+		SeleniumHelper.click(_tabContact, this.getTabContact());
 		return new ContactPage();
 	}
 
 	public RegisterPage goToRegisterPage() {
-		Utilities.click(_tabRegister, this.getTabRegister());
+		SeleniumHelper.click(_tabRegister, this.getTabRegister());
 		return new RegisterPage();
 	}
 
-	public ForgotPasswordPage goToForgotPasswordPage() {
-		Utilities.click(_tabForgotPassword, this.getTabForgotPassword());
-		return new ForgotPasswordPage();
-	}
-
 	public ChangePasswordPage goToChangePasswordPage() {
-		Utilities.click(_tabChangePassword, this.getTabChangePassword());
+		SeleniumHelper.click(_tabChangePassword, this.getTabChangePassword());
 		return new ChangePasswordPage();
 	}
 
 	public TimeTablePage goToTimeTablePage() {
-		Utilities.click(_tabTimeTable, this.getTabTimeTable());
+		SeleniumHelper.click(_tabTimeTable, this.getTabTimeTable());
 		return new TimeTablePage();
 	}
 
 	public TicketPricePage goToTicketPricePage() {
-		Utilities.click(_tabTicketPrice, this.getTabTicketPrice());
+		SeleniumHelper.click(_tabTicketPrice, this.getTabTicketPrice());
 		return new TicketPricePage();
 	}
 
 	public BookTicketPage goToBookTicketPage() {
-		Utilities.click(_tabBookTicket, this.getTabBookTicket());
+		SeleniumHelper.click(_tabBookTicket, this.getTabBookTicket());
 		return new BookTicketPage();
 	}
 
 	public MyTicketPage goToMyTicketPage() {
-		Utilities.click(_tabMyTicket, this.getTabMyTicket());
+		SeleniumHelper.click(_tabMyTicket, this.getTabMyTicket());
 		return new MyTicketPage();
 	}
 

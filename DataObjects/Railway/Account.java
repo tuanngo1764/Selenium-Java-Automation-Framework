@@ -1,5 +1,8 @@
 package Railway;
 
+import Common.Utilities;
+import Constant.Constant;
+
 public class Account {
 
 	// Defining fields
@@ -72,5 +75,12 @@ public class Account {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+	
+	public void initAccount() {
+		this.email = Utilities.generateRandomString(Constant.REGISTER_USERNAME) + Constant.EMAIL_EXTENSION;
+		this.password = Constant.REGISTER_PASSWORD;
+		this.confirmPassword = password;
+		this.pid = Constant.REGISTER_PID;
 	}
 }

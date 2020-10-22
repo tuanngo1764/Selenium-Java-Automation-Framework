@@ -1,12 +1,5 @@
 package Railway;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.apache.commons.io.FileUtils;
-
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
@@ -57,14 +50,5 @@ public class TestBase {
 		System.setProperty("webdriver.chrome.driver", Constant.CHROME_DRIVER_PATH);
 		Constant.WEBDRIVER = new ChromeDriver();
 		Constant.WEBDRIVER.manage().window().maximize();
-	}
-
-	public void takeScreenShot(String filePath) {
-		File scrFile = ((TakesScreenshot) Constant.WEBDRIVER).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(scrFile, new File(filePath));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

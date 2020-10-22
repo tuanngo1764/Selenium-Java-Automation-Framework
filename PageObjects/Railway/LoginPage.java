@@ -3,26 +3,18 @@ package Railway;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Common.Utilities;
 import Constant.Constant;
-
-interface LoginInterface {
-	void fillLoginForm(Account account);
-
-	HomePage clickBtnLogin();
-
-	HomePage loginSuccess(Account account);
-
-	LoginPage loginFailed(Account account);
-}
+import Railway.Interface.LoginInterface;
+import SeleniumHelper.SeleniumHelper;
 
 public class LoginPage extends GeneralPage implements LoginInterface {
 
 	// Locators
-	private final By _txtUsername = By.xpath("");
-	private final By _txtPassword = By.xpath("");
-	private final By _btnLogin = By.xpath("");
-	private final By _lblLoginErrorMsg = By.xpath("");
+	private final By _txtUsername = By.xpath("//input[@id='username']");
+	private final By _txtPassword = By.xpath("//input[@id='password']");
+	private final By _btnLogin = By.xpath("//input[@value='login']");
+	private final By _lblLoginErrorMsg = By.xpath("//p[@class='message error LoginForm']");
+	private final By _forgotPasswordLink = By.xpath("//a[contains(@href,'/ForgotPassword')]");
 
 	// Elements
 	protected WebElement getTxtUsername() {
@@ -40,18 +32,28 @@ public class LoginPage extends GeneralPage implements LoginInterface {
 	protected WebElement getLblLoginErrorMsg() {
 		return Constant.WEBDRIVER.findElement(_lblLoginErrorMsg);
 	}
+	
+	protected WebElement getForgotPasswordLink() {
+		return Constant.WEBDRIVER.findElement(_forgotPasswordLink);
+	}
 
 	// Methods
 	@Override
+	public ForgotPasswordPage goToForgotPasswordPage() {
+		SeleniumHelper.click(_forgotPasswordLink, this.getForgotPasswordLink());
+		return new ForgotPasswordPage();
+	}
+	
+	@Override
 	public void fillLoginForm(Account account) {
 		// Fill login Form
-		Utilities.sendkeys(this.getTxtUsername(), account.getEmail());
-		Utilities.sendkeys(this.getTxtPassword(), account.getPassword());
+		SeleniumHelper.sendkeys(this.getTxtUsername(), account.getEmail());
+		SeleniumHelper.sendkeys(this.getTxtPassword(), account.getPassword());
 	}
 
 	@Override
 	public HomePage clickBtnLogin() {
-		Utilities.click(_btnLogin, this.getBtnLogin());
+		SeleniumHelper.click(_btnLogin, this.getBtnLogin());
 		return new HomePage();
 	}
 

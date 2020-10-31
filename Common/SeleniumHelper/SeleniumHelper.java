@@ -19,7 +19,24 @@ import Constant.Constant;
 
 public class SeleniumHelper {
 
-	public void waitForInvisible(By _element) {
+	public static void waitForTableLoaded(By _element, int timeout) {
+		try {
+			int time = 0;
+			do {
+				try {
+					Thread.sleep(Constant.TIME_SLEEP);
+					time++;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} while (Constant.WEBDRIVER.findElements(_element).size() <= 0 || time < timeout);
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void waitForInvisible(By _element) {
 		try {
 			(new WebDriverWait(Constant.WEBDRIVER, Constant.SHORT_TIME))
 					.until(ExpectedConditions.invisibilityOfElementLocated(_element));

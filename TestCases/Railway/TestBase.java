@@ -21,7 +21,6 @@ public class TestBase {
 	@BeforeClass
 	public synchronized void initialize() {
 		// Create an instance of ExtentsReports class and pass report storage
-		// path as a parameter
 		reports = new ExtentReports(Constant.TEST_RESULTS_PATH, true);
 	}
 

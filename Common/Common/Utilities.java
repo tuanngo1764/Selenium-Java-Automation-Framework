@@ -1,11 +1,14 @@
 package Common;
 
-import java.util.Date;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
-import java.util.Calendar;
+import Constant.SeatType;
+import Constant.Station;
 
 public class Utilities {
 
@@ -15,7 +18,7 @@ public class Utilities {
 
 	public static String generateRandomString(String randomValue) {
 		Date currentDate = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd:MM:yyyyHH:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd:MM:yyHH:mm:ss");
 		String tmp = dateFormat.format(currentDate).toString().replace(":", "");
 		return randomValue + tmp;
 	}
@@ -39,9 +42,25 @@ public class Utilities {
 	public static String generateDepartDate(int days) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DATE, days);
-		String tmp = calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.DAY_OF_MONTH) + "/"
+		String tmp = (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DAY_OF_MONTH) + "/"
 				+ calendar.get(Calendar.YEAR);
 		return tmp;
+	}
+
+	public static String generateRandomStationName() {
+		List<String> departStations = Station.getAllStationName();
+		return departStations.get(generateRandomNumber(0, departStations.size()) - 1);
+	}
+
+	public static String generateRandomArriveAtStationName(String departFrom) {
+		List<String> departStations = Station.getAllStationName();
+		departStations.remove(departStations.indexOf(departFrom));
+		return departStations.get(generateRandomNumber(0, departStations.size()) - 1);
+	}
+	
+	public static String generateRandomTypeName() {
+		List<String> seatTypes = SeatType.getAllTypeName();
+		return seatTypes.get(generateRandomNumber(0, seatTypes.size()) - 1);
 	}
 
 	public static String dateFormat(Date date, String format) {

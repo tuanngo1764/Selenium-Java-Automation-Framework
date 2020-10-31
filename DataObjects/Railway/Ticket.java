@@ -1,5 +1,7 @@
 package Railway;
 
+import Common.Utilities;
+
 public class Ticket {
 
 	// Defining fields
@@ -69,5 +71,13 @@ public class Ticket {
 
 	public void setTicketAmount(int ticketAmount) {
 		this.ticketAmount = ticketAmount;
+	}
+
+	public void initTicket(int addDays) {
+		this.departDate = Utilities.generateDepartDate(addDays);
+		this.departFrom = Utilities.generateRandomStationName();
+		this.arriveAt = Utilities.generateRandomArriveAtStationName(this.departFrom);
+		this.seatType = Utilities.generateRandomTypeName();
+		this.ticketAmount = 1;
 	}
 }

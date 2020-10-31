@@ -1,6 +1,5 @@
 package MailHelper;
 
-import java.util.ArrayList;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,8 +14,6 @@ import javax.mail.Store;
 import com.sun.mail.imap.protocol.FLAGS;
 
 import Constant.Constant;
-import GuruMail.LoginPage;
-import SeleniumHelper.SeleniumHelper;
 
 public class ActiveEmail {
 
@@ -80,17 +77,5 @@ public class ActiveEmail {
 
 		// Click link in email
 		Constant.WEBDRIVER.navigate().to(resetLink);
-	}
-
-	public void activeGuruMail(String mailSubject, String username, String keyword) {
-		// Navigate to http://mail.ges.guru/webmail
-		SeleniumHelper.openUrlInNewTab(Constant.GURU_URL);
-
-		// Login to host mail and activate
-		new LoginPage().login(Constant.MAIL_USERNAME, Constant.MAIL_PASSWORD).clickLinkGuruMail(mailSubject, username,
-				keyword);
-
-		ArrayList<String> tabs = SeleniumHelper.getListTab();
-		SeleniumHelper.switchToWindow(tabs.get(0));
 	}
 }

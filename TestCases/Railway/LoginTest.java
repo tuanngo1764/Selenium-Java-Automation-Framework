@@ -17,25 +17,19 @@ public class LoginTest extends TestBase {
 		String filePath = "";
 		try {
 			// Start test. Mention test script name
-			test = reports.startTest("TC01", "Navigate to QA Railway site & Generate HTML Report");
-			test.log(LogStatus.INFO, "Navigate to QA Railway site");
-
-			// Take screen shot of page
-			filePath = Constant.PASSED_SCREEN_SHOT_PATH;
-			ReportHelper.takeScreenShot(filePath);
-			// Attach screen shot in HTML report
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(filePath));
-
+			test = reports.startTest("TC01", "Sample test script");
+			test.log(LogStatus.INFO, "Step info");
 		} catch (Throwable t) {
+
 			// Print fail info in HTML report
 			test.log(LogStatus.FAIL, t.getMessage());
-
-			// Take screen shot of page
 			filePath = Constant.FAILED_SCREEN_SHOT_PATH;
+			
+			// Take screen shot of page
 			ReportHelper.takeScreenShot(filePath);
-			// Attach screen shot in HTML report
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(filePath));
 
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(filePath));
+			// Attach screen shot in HTML report
 			Assert.assertTrue(false, t.getMessage());
 		}
 	}

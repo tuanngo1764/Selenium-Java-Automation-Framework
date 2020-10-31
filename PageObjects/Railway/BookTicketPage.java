@@ -2,19 +2,23 @@ package Railway;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import Common.Utilities;
 import Constant.Constant;
-import Constant.SeatType;
-import Constant.Station;
 import Railway.Interface.BookTicketInterface;
 import SeleniumHelper.SeleniumHelper;
 
 public class BookTicketPage extends GeneralPage implements BookTicketInterface {
+
+	// Variables
+	private String departFromName;
+	private int countTicketsBooked;
 
 	// Locators
 	private final By _sltDepartDate = By.xpath("//select[@name='Date']");
@@ -51,6 +55,16 @@ public class BookTicketPage extends GeneralPage implements BookTicketInterface {
 
 	// Methods
 	@Override
+	public String getDepartFromName() {
+		return departFromName;
+	}
+
+	@Override
+	public int getCountTicketsBooked() {
+		return countTicketsBooked;
+	}
+
+	@Override
 	public void bookTicket(Ticket ticket) {
 		// Select Depart Date, Depart Station, Seat Type, Ticket Amount, Destination
 		SeleniumHelper.selectByVisibleText(this.getsltDepartDate(), ticket.getDepartDate());
@@ -65,33 +79,35 @@ public class BookTicketPage extends GeneralPage implements BookTicketInterface {
 		SeleniumHelper.click(_btnBookTicket, this.getBtnBookTicket());
 	}
 
-	public BookTicketPage bookTickets(int ticketNumber) {
+	@Override
+	public BookTicketPage bookTickets(int ticketNumber, int addDays) {
+		Ticket ticket = new Ticket();
 		for (int i = 0; i < ticketNumber; i++) {
-			Ticket ticket = new Ticket(Utilities.generateDepartDate(Constant.ADD_DAYS), Station.DA_NANG.getValue(),
-					Station.SAI_GON.getValue(), SeatType.HARD_SEAT.getTypeName(), 1);
+			ticket.initTicket(addDays);
 			this.bookTicket(ticket);
 			this.goToBookTicketPage();
 		}
 		return this;
 	}
 
-	public BookTicketPage bookTicketsWithDisfferentDepartStations(int ticketNumber) {
+	@Override
+	public BookTicketPage bookTicketsWithDifferentDepartStations(int ticketNumber, int addDays) {
+		Ticket ticket = new Ticket();
 		List<String> departStations = new ArrayList<String>();
-		departStations.add(Station.DA_NANG.getValue());
-		departStations.add(Station.PHAN_THIET.getValue());
-		departStations.add(Station.HUE.getValue());
-		departStations.add(Station.NHA_TRANG.getValue());
 
 		for (int i = 0; i < ticketNumber; i++) {
-			int departStationIndex = i;
-			if (departStationIndex >= departStations.size())
-				departStationIndex = 0;
-			Ticket ticket = new Ticket(Utilities.generateDepartDate(Constant.ADD_DAYS),
-					departStations.get(departStationIndex), Station.SAI_GON.getValue(),
-					SeatType.HARD_SEAT.getTypeName(), 1);
+			ticket.initTicket(addDays);
+			departStations.add(ticket.getDepartFrom());
+
 			this.bookTicket(ticket);
 			this.goToBookTicketPage();
 		}
+
+		Map<String, Long> result = departStations.stream()
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		this.departFromName = departStations.get(0);
+		this.countTicketsBooked = Integer.valueOf(result.get(departStations.get(0)).intValue());
+
 		return this;
 	}
 

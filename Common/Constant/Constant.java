@@ -10,9 +10,6 @@ public class Constant {
 	public static final String CHROME_DRIVER_PATH = Utilities.getProjectPath() + "\\Executables\\chromedriver.exe";
 	public static final String RAILWAY_URL = "http://192.168.171.251:8081/Page/HomePage.cshtml";
 	public static final String GURU_URL = "http://mail.ges.guru/webmail";
-	public static final String USERNAME = "";
-	public static final String PASSWORD = "";
-	public static final String EMAIL_EXTENSION = "@gmail.com";
 
 	// Use to perform active Email
 	public static final String MAIL_USERNAME = "safe.railway@ges.guru";
@@ -32,13 +29,10 @@ public class Constant {
 
 	// Register account info
 	public static final String REGISTER_USERNAME = "lgtest";
+	public static final String EMAIL_EXTENSION = "@gmail.com";
 	public static final String REGISTER_PASSWORD = "12345678";
 	public static final String REGISTER_PID = "987654321";
 
-	// Book ticket infor
-	public static final int ADD_DAYS = 60;
-	public static final String STATUS = "Paid";
-	public static final int TICKETS_NUMBER = 7;
 	// Report
 	public static final String PASSED_SCREEN_SHOT_PATH = Utilities.getProjectPath() + "/test-results/Passed.png";
 	public static final String FAILED_SCREEN_SHOT_PATH = Utilities.getProjectPath() + "/test-results/Failed.png";

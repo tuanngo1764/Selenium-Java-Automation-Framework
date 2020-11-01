@@ -32,13 +32,13 @@ public class GeneralPage {
 	// Methods
 	public JunkPage goToJunkMailBox() {
 		SeleniumHelper.click(_junkMailBox, this.getJunkMailBox());
-		SeleniumHelper.waitForTableLoaded(_messagelist, Constant.SHORT_TIME);
+		SeleniumHelper.waitForDisplayed(_messagelist, Constant.SHORT_TIME);
 		return new JunkPage();
 	}
 
 	public InboxPage goToInboxMailBox() {
 		SeleniumHelper.click(_inboxMailBox, this.getInboxMailBox());
-		SeleniumHelper.waitForTableLoaded(_messagelist, Constant.SHORT_TIME);
+		SeleniumHelper.waitForDisplayed(_messagelist, Constant.SHORT_TIME);
 		return new InboxPage();
 	}
 

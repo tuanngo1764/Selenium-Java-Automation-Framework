@@ -19,7 +19,7 @@ import Constant.Constant;
 
 public class SeleniumHelper {
 
-	public static void waitForTableLoaded(By _element, int timeout) {
+	public static void waitForDisplayed(By _element, int timeout) {
 		try {
 			int time = 0;
 			do {
@@ -178,6 +178,26 @@ public class SeleniumHelper {
 		try {
 			waitForClickable(_element);
 			element.click();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void doubleClick(By _element, WebElement element) {
+		try {
+			waitForClickable(_element);
+			Actions action = new Actions(Constant.WEBDRIVER);
+			action.moveToElement(element).doubleClick().build().perform();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void doubleClickByJSExecutor(By _element, WebElement element) {
+		try {
+			((JavascriptExecutor) Constant.WEBDRIVER).executeScript("arguments[0].scrollIntoView();", element);
+			Actions action = new Actions(Constant.WEBDRIVER);
+			action.doubleClick(element).build().perform();
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +36,57 @@ public class SeleniumHelper {
 		} catch (TimeoutException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void waitUntilPropertyChange(By _element, String propertyName, int timeout) {
+		try {
+			String previousValue = null;
+
+			if (propertyName == "text")
+				previousValue = getText(_element, timeout);
+			else
+				previousValue = getAttribute(_element, propertyName, timeout);
+
+			String currentValue = previousValue;
+			int time = 0;
+			do {
+				try {
+					Thread.sleep(Constant.TIME_SLEEP);
+
+					if (propertyName == "text")
+						currentValue = getText(_element, timeout);
+					else
+						currentValue = getAttribute(_element, propertyName, timeout);
+
+					time++;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} while (previousValue == currentValue || time < timeout);
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void waitUntilDisabled(By _element, int timeout) {
+		try {
+			int time = 0;
+			boolean isElementEnabled = true;
+			do {
+				try {
+					Thread.sleep(Constant.TIME_SLEEP);
+					isElementEnabled = isEnabled(_element, timeout);
+					time++;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch blocks
+					e.printStackTrace();
+				}
+			} while (isElementEnabled || time < timeout);
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public static void waitForInvisible(By _element) {
@@ -217,9 +270,170 @@ public class SeleniumHelper {
 		return selector.getFirstSelectedOption().getText();
 	}
 
+	public static String getAttribute(By _element, String atrribute, int timeout) {
+		String result = null;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).getAttribute(atrribute);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static String getCssValues(By _element, String propertyName, int timeout) {
+		String result = null;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).getCssValue(propertyName);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static String getText(By _element, int timeout) {
+		String result = null;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).getText();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static Point getLocation(By _element, int timeout) {
+		Point result = null;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).getLocation();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static int getLocationOfX(By _element, int timeout) {
+		int result = 0;
+		try {
+			result = getLocation(_element, timeout).getX();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static int getLocationOfY(By _element, int timeout) {
+		int result = 0;
+		try {
+			result = getLocation(_element, timeout).getY();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static String getControlValue(By _element, int timeout) {
+		String result = null;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).getAttribute("value");
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static String getControlTitle(By _element, int timeout) {
+		String result = null;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).getAttribute("title");
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static String getControlValueById(By _element, int timeout) {
+		String result = null;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).getAttribute("id");
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static String getControlValueByName(By _element, int timeout) {
+		String result = null;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).getAttribute("name");
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static Dimension getSize(By _element, int timeout) {
+		Dimension result = null;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).getSize();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static int getElementWidth(By _element, int timeout) {
+		int result = 0;
+		try {
+			result = getSize(_element, timeout).getWidth();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static int getElementHeight(By _element, int timeout) {
+		int result = 0;
+		try {
+			result = getSize(_element, timeout).getHeight();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public static void openUrlInNewTab(String url) {
 		Constant.WEBDRIVER.get(url);
 		String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, "t");
 		Constant.WEBDRIVER.findElement(By.cssSelector("body")).sendKeys(selectLinkOpeninNewTab);
+	}
+
+	public static boolean isSelected(By _element, int timeout) {
+		boolean result = false;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).isSelected();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static boolean isEnabled(By _element, int timeout) {
+		boolean result = false;
+		try {
+			waitForDisplayed(_element, timeout);
+			result = Constant.WEBDRIVER.findElement(_element).isEnabled();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

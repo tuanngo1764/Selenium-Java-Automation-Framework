@@ -6,7 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import Constant.Constant;
-import SeleniumHelper.SeleniumHelper;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 
 public class GeneralPage {
 
@@ -18,15 +19,15 @@ public class GeneralPage {
 
 	// Elements
 	protected WebElement getJunkMailBox() {
-		return Constant.WEBDRIVER.findElement(_junkMailBox);
+		return DriverManager.getDriver().findElement(_junkMailBox);
 	}
 
 	protected WebElement getInboxMailBox() {
-		return Constant.WEBDRIVER.findElement(_inboxMailBox);
+		return DriverManager.getDriver().findElement(_inboxMailBox);
 	}
 
 	protected WebElement getMessageContFrame() {
-		return Constant.WEBDRIVER.findElement(_messageContFrame);
+		return DriverManager.getDriver().findElement(_messageContFrame);
 	}
 
 	// Methods
@@ -47,11 +48,11 @@ public class GeneralPage {
 		try {
 
 			this.goToInboxMailBox();
-			if (Constant.WEBDRIVER.findElements(_mail).size() <= 0) {
+			if (DriverManager.getDriver().findElements(_mail).size() <= 0) {
 				this.goToJunkMailBox();
 			}
 
-			WebElement mail = Constant.WEBDRIVER.findElement(_mail);
+			WebElement mail = DriverManager.getDriver().findElement(_mail);
 			SeleniumHelper.click(_mail, mail);
 
 		} catch (NullPointerException e) {
@@ -67,7 +68,7 @@ public class GeneralPage {
 
 		By _link = By.xpath("//div[@id='messagebody']/div[contains(.,'" + keyword + "')]//a");
 		SeleniumHelper.waitForVisible(_link);
-		WebElement link = Constant.WEBDRIVER.findElement(_link);
+		WebElement link = DriverManager.getDriver().findElement(_link);
 
 		SeleniumHelper.click(_link, link);
 	}

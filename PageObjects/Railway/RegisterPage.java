@@ -3,9 +3,9 @@ package Railway;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Constant.Constant;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 import Railway.Interface.RegisterInterface;
-import SeleniumHelper.SeleniumHelper;
 
 public class RegisterPage extends GeneralPage implements RegisterInterface {
 	// Locators
@@ -20,40 +20,40 @@ public class RegisterPage extends GeneralPage implements RegisterInterface {
 
 	// Elements
 	protected WebElement getLblPidErrorMsg() {
-		return Constant.WEBDRIVER.findElement(_lblPidErrorMsg);
+		return DriverManager.getDriver().findElement(_lblPidErrorMsg);
 	}
 
 	protected WebElement getLblPasswordErrorMsg() {
-		return Constant.WEBDRIVER.findElement(_lblPasswordErrorMsg);
+		return DriverManager.getDriver().findElement(_lblPasswordErrorMsg);
 	}
 
 	protected WebElement getLblErrorMsg() {
-		return Constant.WEBDRIVER.findElement(_lblErrorMsg);
+		return DriverManager.getDriver().findElement(_lblErrorMsg);
 	}
 
 	protected WebElement getTxtEmail() {
-		return Constant.WEBDRIVER.findElement(_txtEmail);
+		return DriverManager.getDriver().findElement(_txtEmail);
 	}
 
 	protected WebElement getTxtPassword() {
-		return Constant.WEBDRIVER.findElement(_txtPassword);
+		return DriverManager.getDriver().findElement(_txtPassword);
 	}
 
 	protected WebElement getTxtConfirmPassword() {
-		return Constant.WEBDRIVER.findElement(_txtConfirmPassword);
+		return DriverManager.getDriver().findElement(_txtConfirmPassword);
 	}
 
 	protected WebElement getTxtPID() {
-		return Constant.WEBDRIVER.findElement(_txtPID);
+		return DriverManager.getDriver().findElement(_txtPID);
 	}
 
 	protected WebElement getBtnRegister() {
-		return Constant.WEBDRIVER.findElement(_btnRegister);
+		return DriverManager.getDriver().findElement(_btnRegister);
 	}
 
 	// Methods
 	public String getPidErrorMsg() {
-		int countFind = Constant.WEBDRIVER.findElements(_lblPidErrorMsg).size();
+		int countFind = DriverManager.getDriver().findElements(_lblPidErrorMsg).size();
 		if (countFind != 0) {
 			return this.getLblPidErrorMsg().getText();
 		}
@@ -67,7 +67,7 @@ public class RegisterPage extends GeneralPage implements RegisterInterface {
 	public String getRegisterErrorMsg() {
 		return this.getLblErrorMsg().getText();
 	}
-	
+
 	@Override
 	public void fillRegisterForm(Account account) {
 		// Fill register form

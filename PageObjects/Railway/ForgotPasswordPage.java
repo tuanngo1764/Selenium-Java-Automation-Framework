@@ -3,9 +3,9 @@ package Railway;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Constant.Constant;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 import Railway.Interface.ForgotPasswordInterface;
-import SeleniumHelper.SeleniumHelper;
 
 public class ForgotPasswordPage extends GeneralPage implements ForgotPasswordInterface {
 
@@ -15,11 +15,11 @@ public class ForgotPasswordPage extends GeneralPage implements ForgotPasswordInt
 
 	// Elements
 	protected WebElement getTxtEmail() {
-		return Constant.WEBDRIVER.findElement(_txtEmail);
+		return DriverManager.getDriver().findElement(_txtEmail);
 	}
 
 	protected WebElement getBtnSendInstructions() {
-		return Constant.WEBDRIVER.findElement(_btnSendInstructions);
+		return DriverManager.getDriver().findElement(_btnSendInstructions);
 	}
 
 	// Methods

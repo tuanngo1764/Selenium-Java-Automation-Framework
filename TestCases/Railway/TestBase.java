@@ -1,53 +1,42 @@
 package Railway;
 
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
+import Common.DriverType;
 import Constant.Constant;
+import DriverWrapper.DriverManager;
 
 public class TestBase {
 
-	protected HomePage homePage;
-	protected Account account;
 	protected static ExtentReports reports;
 	protected static ExtentTest test;
 
-	@BeforeClass
-	public synchronized void initialize() {
-		// Create an instance of ExtentsReports class and pass report storage
-		reports = new ExtentReports(Constant.TEST_RESULTS_PATH, true);
+	private void initChromeDriver() {
+		DriverManager.createDriver(DriverType.Chrome, false, Constant.HUB);
 	}
 
-	@BeforeTest
-	public void beforeMethod() {
-		System.out.println("Pre-condition");
-		initChromeDriver();
-	}
-
-	@AfterTest
-	public void tearDown() {
-		// Ending Test
+	private void generateReport() {
+		// Ending test and Writing log into HTML report
 		reports.endTest(test);
-
-		// writing everything into HTML report
 		reports.flush();
 	}
 
-	@AfterClass
-	public void afterMethod() {
-		System.out.println("Post-condition");
-		Constant.WEBDRIVER.quit();
+	@BeforeMethod
+	public void beforeMethod() {
+		System.out.println("Pre-condition");
+		System.setProperty("project_path", System.getProperty("user.dir"));
+		this.initChromeDriver();
+		DriverManager.getDriver().manage().window().maximize();
 	}
 
-	private void initChromeDriver() {
-		System.setProperty("webdriver.chrome.driver", Constant.CHROME_DRIVER_PATH);
-		Constant.WEBDRIVER = new ChromeDriver();
-		Constant.WEBDRIVER.manage().window().maximize();
+	@AfterMethod
+	public void afterMethod() {
+		System.out.println("Post-condition");
+		DriverManager.getDriver().quit();
+		this.generateReport();
 	}
 }

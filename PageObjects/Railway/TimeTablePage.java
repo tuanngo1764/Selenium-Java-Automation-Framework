@@ -3,9 +3,9 @@ package Railway;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Constant.Constant;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 import Railway.Interface.TimeTableInterface;
-import SeleniumHelper.SeleniumHelper;
 
 public class TimeTablePage extends GeneralPage implements TimeTableInterface {
 
@@ -19,7 +19,7 @@ public class TimeTablePage extends GeneralPage implements TimeTableInterface {
 		By _ticketPrice = By.xpath("//table[@class='MyTable WideTable']//tr//td[.='" + departStation
 				+ "']//following-sibling::td[.='" + arriveStation + "']/..//a[contains(@href,'TicketPricePage')]");
 
-		WebElement ticketPriceLink = Constant.WEBDRIVER.findElement(_ticketPrice);
+		WebElement ticketPriceLink = DriverManager.getDriver().findElement(_ticketPrice);
 		SeleniumHelper.click(_ticketPrice, ticketPriceLink);
 
 		return new TicketPricePage();
@@ -29,7 +29,7 @@ public class TimeTablePage extends GeneralPage implements TimeTableInterface {
 	public BookTicketPage goToBookTicketPage(String departStation, String arriveStation) {
 		By _bookTicket = By.xpath("//table[@class='MyTable WideTable']//tr//td[.='" + departStation
 				+ "']//following-sibling::td[.='" + arriveStation + "']/..//a[contains(@href,'BookTicketPage')]");
-		WebElement bookTicketLink = Constant.WEBDRIVER.findElement(_bookTicket);
+		WebElement bookTicketLink = DriverManager.getDriver().findElement(_bookTicket);
 		SeleniumHelper.click(_bookTicket, bookTicketLink);
 
 		return new BookTicketPage();

@@ -1,0 +1,7 @@
+
+2020-12-16 22:18:05 INFO  LoginTest:27 - TC01: Sample test script
+2020-12-16 22:18:05 INFO  LoginTest:32 - Step 1: Navigate to Home page
+2020-12-16 22:18:10 INFO  LoginTest:43 - TC01 is executed successfully
+2020-12-16 22:18:16 INFO  LoginTest:69 - TC02: Sample test script
+2020-12-16 22:18:16 INFO  LoginTest:74 - Step 1: Navigate to Home page
+2020-12-16 22:18:22 INFO  LoginTest:85 - TC02 is executed successfully

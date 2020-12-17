@@ -3,9 +3,9 @@ package Railway;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Constant.Constant;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 import Railway.Interface.LoginInterface;
-import SeleniumHelper.SeleniumHelper;
 
 public class LoginPage extends GeneralPage implements LoginInterface {
 
@@ -18,23 +18,23 @@ public class LoginPage extends GeneralPage implements LoginInterface {
 
 	// Elements
 	protected WebElement getTxtUsername() {
-		return Constant.WEBDRIVER.findElement(_txtUsername);
+		return DriverManager.getDriver().findElement(_txtUsername);
 	}
 
 	protected WebElement getTxtPassword() {
-		return Constant.WEBDRIVER.findElement(_txtPassword);
+		return DriverManager.getDriver().findElement(_txtPassword);
 	}
 
 	protected WebElement getBtnLogin() {
-		return Constant.WEBDRIVER.findElement(_btnLogin);
+		return DriverManager.getDriver().findElement(_btnLogin);
 	}
 
 	protected WebElement getLblLoginErrorMsg() {
-		return Constant.WEBDRIVER.findElement(_lblLoginErrorMsg);
+		return DriverManager.getDriver().findElement(_lblLoginErrorMsg);
 	}
-	
+
 	protected WebElement getForgotPasswordLink() {
-		return Constant.WEBDRIVER.findElement(_forgotPasswordLink);
+		return DriverManager.getDriver().findElement(_forgotPasswordLink);
 	}
 
 	// Methods
@@ -43,7 +43,7 @@ public class LoginPage extends GeneralPage implements LoginInterface {
 		SeleniumHelper.click(_forgotPasswordLink, this.getForgotPasswordLink());
 		return new ForgotPasswordPage();
 	}
-	
+
 	@Override
 	public void fillLoginForm(Account account) {
 		// Fill login Form

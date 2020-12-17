@@ -3,8 +3,8 @@ package GuruMail;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Constant.Constant;
-import SeleniumHelper.SeleniumHelper;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 
 public class LoginPage {
 
@@ -15,15 +15,15 @@ public class LoginPage {
 
 	// Elements
 	protected WebElement getTxtUsername() {
-		return Constant.WEBDRIVER.findElement(_txtUsername);
+		return DriverManager.getDriver().findElement(_txtUsername);
 	}
 
 	protected WebElement getTxtPassword() {
-		return Constant.WEBDRIVER.findElement(_txtPassword);
+		return DriverManager.getDriver().findElement(_txtPassword);
 	}
 
 	protected WebElement getBtnLogin() {
-		return Constant.WEBDRIVER.findElement(_btnLogin);
+		return DriverManager.getDriver().findElement(_btnLogin);
 	}
 
 	// Methods

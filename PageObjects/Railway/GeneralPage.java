@@ -1,13 +1,10 @@
 package Railway;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Constant.Constant;
-import SeleniumHelper.SeleniumHelper;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 
 public class GeneralPage {
 
@@ -24,55 +21,50 @@ public class GeneralPage {
 	private final By _tabBookTicket = By.xpath("//div[@id='menu']//a[@href='/Page/BookTicketPage.cshtml']");
 	private final By _tabMyTicket = By.xpath("//div[@id='menu']//a[@href='/Page/ManageTicket.cshtml']");
 	private final By _lblWelcomeMessage = By.xpath("//div[@class='account']/strong");
-	private final By _loadingIcon = By.xpath("");
 
 	// Elements
 	protected WebElement getTabLogout() {
-		return Constant.WEBDRIVER.findElement(_tabLogout);
+		return DriverManager.getDriver().findElement(_tabLogout);
 	}
 
 	protected WebElement getTabLogin() {
-		return Constant.WEBDRIVER.findElement(_tabLogin);
+		return DriverManager.getDriver().findElement(_tabLogin);
 	}
 
 	protected WebElement getTabHome() {
-		return Constant.WEBDRIVER.findElement(_tabHome);
+		return DriverManager.getDriver().findElement(_tabHome);
 	}
 
 	protected WebElement getTabContact() {
-		return Constant.WEBDRIVER.findElement(_tabContact);
+		return DriverManager.getDriver().findElement(_tabContact);
 	}
 
 	protected WebElement getTabRegister() {
-		return Constant.WEBDRIVER.findElement(_tabRegister);
+		return DriverManager.getDriver().findElement(_tabRegister);
 	}
 
 	protected WebElement getTabChangePassword() {
-		return Constant.WEBDRIVER.findElement(_tabChangePassword);
+		return DriverManager.getDriver().findElement(_tabChangePassword);
 	}
 
 	protected WebElement getTabTimeTable() {
-		return Constant.WEBDRIVER.findElement(_tabTimeTable);
+		return DriverManager.getDriver().findElement(_tabTimeTable);
 	}
 
 	protected WebElement getTabTicketPrice() {
-		return Constant.WEBDRIVER.findElement(_tabTicketPrice);
+		return DriverManager.getDriver().findElement(_tabTicketPrice);
 	}
 
 	protected WebElement getTabBookTicket() {
-		return Constant.WEBDRIVER.findElement(_tabBookTicket);
+		return DriverManager.getDriver().findElement(_tabBookTicket);
 	}
 
 	protected WebElement getTabMyTicket() {
-		return Constant.WEBDRIVER.findElement(_tabMyTicket);
+		return DriverManager.getDriver().findElement(_tabMyTicket);
 	}
 
 	protected WebElement getLblWelcomeMessage() {
-		return Constant.WEBDRIVER.findElement(_lblWelcomeMessage);
-	}
-
-	protected List<WebElement> getLoadingIcons() {
-		return Constant.WEBDRIVER.findElements(_loadingIcon);
+		return DriverManager.getDriver().findElement(_lblWelcomeMessage);
 	}
 
 	// Methods
@@ -128,12 +120,5 @@ public class GeneralPage {
 	public MyTicketPage goToMyTicketPage() {
 		SeleniumHelper.click(_tabMyTicket, this.getTabMyTicket());
 		return new MyTicketPage();
-	}
-
-	public void waitForLoadingIconToDisappear() {
-		List<WebElement> LoadingIcons = this.getLoadingIcons();
-		while (LoadingIcons.size() <= 0) {
-			Constant.WEBDRIVER.manage().timeouts().implicitlyWait(Constant.TIME_SLEEP, TimeUnit.SECONDS);
-		}
 	}
 }

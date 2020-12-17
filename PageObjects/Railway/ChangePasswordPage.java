@@ -3,9 +3,9 @@ package Railway;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Constant.Constant;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 import Railway.Interface.ChangePasswordInterface;
-import SeleniumHelper.SeleniumHelper;
 
 public class ChangePasswordPage extends GeneralPage implements ChangePasswordInterface {
 
@@ -17,19 +17,19 @@ public class ChangePasswordPage extends GeneralPage implements ChangePasswordInt
 
 	// Elements
 	protected WebElement getTxtCurrentPassword() {
-		return Constant.WEBDRIVER.findElement(_txtCurrentPassword);
+		return DriverManager.getDriver().findElement(_txtCurrentPassword);
 	}
 
 	protected WebElement getTxtNewPassword() {
-		return Constant.WEBDRIVER.findElement(_txtNewPassword);
+		return DriverManager.getDriver().findElement(_txtNewPassword);
 	}
 
 	protected WebElement getTxtConfirmPassword() {
-		return Constant.WEBDRIVER.findElement(_txtConfirmPassword);
+		return DriverManager.getDriver().findElement(_txtConfirmPassword);
 	}
 
 	protected WebElement getBtnChangePassword() {
-		return Constant.WEBDRIVER.findElement(_btnChangePassword);
+		return DriverManager.getDriver().findElement(_btnChangePassword);
 	}
 
 	// Methods

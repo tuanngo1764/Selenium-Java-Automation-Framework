@@ -7,13 +7,24 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import Constant.Constant;
 import Constant.SeatType;
 import Constant.Station;
 
 public class Utilities {
 
+	private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
 	public static String getProjectPath() {
 		return System.getProperty("user.dir");
+	}
+
+	private static String initializeResultFolder(String testcase) {
+		return Constant.RESULT_FOLDER.replace("testcase_name", testcase);
+	}
+
+	public static String initializeReportFile(String testcase, String fileName) {
+		return initializeResultFolder(testcase).replace("file_name", fileName);
 	}
 
 	public static String generateRandomString(String randomValue) {
@@ -24,7 +35,7 @@ public class Utilities {
 	}
 
 	public static String getRandomString(int len) {
-		char[] ch = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
+		char[] ch = ALPHABET.toCharArray();
 		char[] c = new char[len];
 
 		SecureRandom random = new SecureRandom();
@@ -57,7 +68,7 @@ public class Utilities {
 		departStations.remove(departStations.indexOf(departFrom));
 		return departStations.get(generateRandomNumber(0, departStations.size()) - 1);
 	}
-	
+
 	public static String generateRandomTypeName() {
 		List<String> seatTypes = SeatType.getAllTypeName();
 		return seatTypes.get(generateRandomNumber(0, seatTypes.size()) - 1);
@@ -74,5 +85,18 @@ public class Utilities {
 		String hex = String.format("#%02X%02X%02X", Integer.parseInt(gbr[0]), Integer.parseInt(gbr[1]),
 				Integer.parseInt(gbr[2]));
 		return hex.toUpperCase();
+	}
+
+	public static boolean areTwoListsEqual(List<String> list1, List<String> list2) {
+		if (list1.size() != list2.size()) {
+			return false;
+		} else {
+			for (int i = 1; i < list1.size(); i++) {
+				if (!list1.get(i).equals(list2.get(i))) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }

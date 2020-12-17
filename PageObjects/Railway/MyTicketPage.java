@@ -3,9 +3,9 @@ package Railway;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Constant.Constant;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 import Railway.Interface.MyTicketInterface;
-import SeleniumHelper.SeleniumHelper;
 
 public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 
@@ -20,31 +20,31 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 
 	// Elements
 	protected WebElement getLblManageTicket() {
-		return Constant.WEBDRIVER.findElement(_lblManageTicket);
+		return DriverManager.getDriver().findElement(_lblManageTicket);
 	}
 
 	protected WebElement getLblErrorMessage() {
-		return Constant.WEBDRIVER.findElement(_lblErrorMessage);
+		return DriverManager.getDriver().findElement(_lblErrorMessage);
 	}
 
 	protected WebElement getTblTicketRow() {
-		return Constant.WEBDRIVER.findElement(_tblTicketRow);
+		return DriverManager.getDriver().findElement(_tblTicketRow);
 	}
 
 	protected WebElement getCmbDepartStation() {
-		return Constant.WEBDRIVER.findElement(_cmbDepartStation);
+		return DriverManager.getDriver().findElement(_cmbDepartStation);
 	}
 
 	protected WebElement getBtnApplyFilter() {
-		return Constant.WEBDRIVER.findElement(_btnApplyFilter);
+		return DriverManager.getDriver().findElement(_btnApplyFilter);
 	}
 
 	protected WebElement getTxtDepartDateFilter() {
-		return Constant.WEBDRIVER.findElement(_txtDepartDateFilter);
+		return DriverManager.getDriver().findElement(_txtDepartDateFilter);
 	}
 
 	protected WebElement getCmbStatus() {
-		return Constant.WEBDRIVER.findElement(_cmbStatus);
+		return DriverManager.getDriver().findElement(_cmbStatus);
 	}
 
 	// Methods
@@ -75,7 +75,7 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 
 	@Override
 	public Integer getTicketNumber() {
-		return Constant.WEBDRIVER.findElements(_tblTicketRow).size() - 1;
+		return DriverManager.getDriver().findElements(_tblTicketRow).size() - 1;
 	}
 
 	// To cancel ticket booked
@@ -88,7 +88,7 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 				+ "')]/following-sibling::td[contains(.,'" + ticket.getTicketAmount()
 				+ "')]/..//input[@type='button'][@value='Cancel']");
 
-		WebElement ticketPriceBtn = Constant.WEBDRIVER.findElement(_ticketPrice);
+		WebElement ticketPriceBtn = DriverManager.getDriver().findElement(_ticketPrice);
 		SeleniumHelper.click(_ticketPrice, ticketPriceBtn);
 
 		/*
@@ -109,12 +109,12 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 				+ "')]/following-sibling::td[contains(.,'" + ticket.getTicketAmount()
 				+ "')]/..//input[@type='button'][@value='Cancel']");
 
-		return Constant.WEBDRIVER.findElements(_ticket).size() > 0 ? true : false;
+		return DriverManager.getDriver().findElements(_ticket).size() > 0 ? true : false;
 	}
 
 	@Override
 	public Boolean checkFilterByDepartStation(String departStation, int expected) {
-		int row = Constant.WEBDRIVER
+		int row = DriverManager.getDriver()
 				.findElements(By.xpath("//table[contains(@class,'MyTable')]//td[.='" + departStation + "']")).size();
 		if (row == expected) {
 			return true;
@@ -124,8 +124,8 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 
 	@Override
 	public Boolean checkFilterByDepartDate(String departDate, int expected) {
-		int row = Constant.WEBDRIVER.findElements(By.xpath("//table[contains(@class,'MyTable')]//td[.='" + departDate
-				+ "']/../preceding-sibling::tr/th[.='Depart Date']")).size();
+		int row = DriverManager.getDriver().findElements(By.xpath("//table[contains(@class,'MyTable')]//td[.='"
+				+ departDate + "']/../preceding-sibling::tr/th[.='Depart Date']")).size();
 
 		if (row == expected) {
 			return true;

@@ -3,9 +3,9 @@ package Railway;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import Constant.Constant;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 import Railway.Interface.ResetPasswordInterface;
-import SeleniumHelper.SeleniumHelper;
 
 public class ResetPasswordPage extends GeneralPage implements ResetPasswordInterface {
 
@@ -21,31 +21,31 @@ public class ResetPasswordPage extends GeneralPage implements ResetPasswordInter
 
 	// Elements
 	protected WebElement getLblConfirmPasswordErrorMessage() {
-		return Constant.WEBDRIVER.findElement(_lblConfirmPasswordErrorMessage);
+		return DriverManager.getDriver().findElement(_lblConfirmPasswordErrorMessage);
 	}
 
 	protected WebElement getLblResetTokenErrorMessage() {
-		return Constant.WEBDRIVER.findElement(_lblResetTokenErrorMessage);
+		return DriverManager.getDriver().findElement(_lblResetTokenErrorMessage);
 	}
 
 	protected WebElement getLblErrorMessage() {
-		return Constant.WEBDRIVER.findElement(_lblErrorMessage);
+		return DriverManager.getDriver().findElement(_lblErrorMessage);
 	}
 
 	protected WebElement getTxtNewPassword() {
-		return Constant.WEBDRIVER.findElement(_txtNewPassword);
+		return DriverManager.getDriver().findElement(_txtNewPassword);
 	}
 
 	protected WebElement getTxtConfirmPassword() {
-		return Constant.WEBDRIVER.findElement(_txtConfirmPassword);
+		return DriverManager.getDriver().findElement(_txtConfirmPassword);
 	}
 
 	protected WebElement getTxtResetToken() {
-		return Constant.WEBDRIVER.findElement(_txtResetToken);
+		return DriverManager.getDriver().findElement(_txtResetToken);
 	}
 
 	protected WebElement getBtnResetPassword() {
-		return Constant.WEBDRIVER.findElement(_btnResetPassword);
+		return DriverManager.getDriver().findElement(_btnResetPassword);
 	}
 
 	// Methods

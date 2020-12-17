@@ -11,8 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import Constant.Constant;
+import DriverWrapper.DriverManager;
+import ElementWrapper.SeleniumHelper;
 import Railway.Interface.BookTicketInterface;
-import SeleniumHelper.SeleniumHelper;
 
 public class BookTicketPage extends GeneralPage implements BookTicketInterface {
 
@@ -30,27 +31,27 @@ public class BookTicketPage extends GeneralPage implements BookTicketInterface {
 
 	// Elements
 	protected WebElement getBtnBookTicket() {
-		return Constant.WEBDRIVER.findElement(_btnBookTicket);
+		return DriverManager.getDriver().findElement(_btnBookTicket);
 	}
 
 	protected WebElement getsltDepartDate() {
-		return Constant.WEBDRIVER.findElement(_sltDepartDate);
+		return DriverManager.getDriver().findElement(_sltDepartDate);
 	}
 
 	protected WebElement getsltDepartFrom() {
-		return Constant.WEBDRIVER.findElement(_sltDepartFrom);
+		return DriverManager.getDriver().findElement(_sltDepartFrom);
 	}
 
 	protected WebElement getsltArriveAt() {
-		return Constant.WEBDRIVER.findElement(_sltArriveAt);
+		return DriverManager.getDriver().findElement(_sltArriveAt);
 	}
 
 	protected WebElement getsltSeatType() {
-		return Constant.WEBDRIVER.findElement(_sltSeatType);
+		return DriverManager.getDriver().findElement(_sltSeatType);
 	}
 
 	protected WebElement getTxtTicketAmount() {
-		return Constant.WEBDRIVER.findElement(_txtTicketAmount);
+		return DriverManager.getDriver().findElement(_txtTicketAmount);
 	}
 
 	// Methods

@@ -1,1 +1,0 @@
-- Double click to "start.bat" file to start the Selenium Grid, Start Hub in localhost, and to add Node to the hub.

@@ -17,14 +17,35 @@ public enum SeatType {
 		this.typeCode = code;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the type name.
+	 * 
+	 * @return String, the type name
+	 */
 	public String getTypeName() {
 		return this.typeName;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the type code.
+	 * 
+	 * @return String, the type code
+	 */
 	public String getTypeCode() {
 		return this.typeCode;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the list of 'Seat type'.
+	 * 
+	 * @return List, the list of 'Seat type'
+	 */
 	public static List<String> getAllTypeName() {
 		List<String> seatTypes = new ArrayList<String>();
 		seatTypes.add(SeatType.HARD_SEAT.getTypeName());

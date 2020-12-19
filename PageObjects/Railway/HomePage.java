@@ -11,6 +11,13 @@ public class HomePage extends GeneralPage implements HomeInterface {
 	// Elements
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Open the site.
+	 * 
+	 * @return HomePage
+	 */
 	@Override
 	public HomePage open() {
 		DriverManager.getDriver().navigate().to(Constant.RAILWAY_URL);

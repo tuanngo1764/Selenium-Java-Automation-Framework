@@ -23,18 +23,38 @@ public class ForgotPasswordPage extends GeneralPage implements ForgotPasswordInt
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Fill the email on the Forgot password form.
+	 * 
+	 */
 	@Override
 	public void fillForgotPasswordForm(String email) {
 		// Fill register form
 		SeleniumHelper.sendkeys(this.getTxtEmail(), email);
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Click the send instructions button
+	 * 
+	 * @return ForgotPasswordPage
+	 */
 	@Override
 	public ForgotPasswordPage clickSendInstructions() {
 		SeleniumHelper.click(_btnSendInstructions, this.getBtnSendInstructions());
 		return this;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Submit Forgot password form
+	 * 
+	 * @return ForgotPasswordPage
+	 */
 	@Override
 	public ForgotPasswordPage sendInstructions(String email) {
 		// Submit change password form

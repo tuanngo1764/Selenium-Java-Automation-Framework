@@ -52,6 +52,13 @@ public class RegisterPage extends GeneralPage implements RegisterInterface {
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the error message.
+	 * 
+	 * @return String the error message
+	 */
 	public String getPidErrorMsg() {
 		int countFind = DriverManager.getDriver().findElements(_lblPidErrorMsg).size();
 		if (countFind != 0) {
@@ -60,14 +67,35 @@ public class RegisterPage extends GeneralPage implements RegisterInterface {
 		return "";
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the error message.
+	 * 
+	 * @return String, the error message
+	 */
 	public String getPasswordwdErrorMsg() {
 		return this.getLblPasswordErrorMsg().getText();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the error message.
+	 * 
+	 * @return String, the error message
+	 */
 	public String getRegisterErrorMsg() {
 		return this.getLblErrorMsg().getText();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Fill the email, the password, the confirm password and the PID on the
+	 *         Register form.
+	 * 
+	 */
 	@Override
 	public void fillRegisterForm(Account account) {
 		// Fill register form
@@ -77,12 +105,26 @@ public class RegisterPage extends GeneralPage implements RegisterInterface {
 		SeleniumHelper.sendkeys(this.getTxtPID(), account.getPid());
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Click to the Register button.
+	 * 
+	 * @return SuccessfulRegisteringPage
+	 */
 	@Override
 	public SuccessfulRegisteringPage clickBtnRegister() {
 		SeleniumHelper.click(_btnRegister, this.getBtnRegister());
 		return new SuccessfulRegisteringPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Submit the Register page.
+	 * 
+	 * @return SuccessfulRegisteringPage
+	 */
 	@Override
 	public SuccessfulRegisteringPage createAccountSuccess(Account account) {
 		// Submit register form
@@ -92,6 +134,13 @@ public class RegisterPage extends GeneralPage implements RegisterInterface {
 		return new SuccessfulRegisteringPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Submit the Register form.
+	 * 
+	 * @return RegisterPage
+	 */
 	@Override
 	public RegisterPage createAccountFailed(Account account) {
 		// Submit register form

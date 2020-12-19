@@ -15,10 +15,16 @@ import ElementWrapper.SeleniumHelper;
 
 public class FileHelper {
 
+	/**
+	 * @author tuan.ngo
+	 */
 	public void uploadFileUsingSendKeys(WebElement element, String path) {
 		SeleniumHelper.sendkeys(element, path);
 	}
 
+	/**
+	 * @author tuan.ngo
+	 */
 	public void uploadFileUsingRobot(By _element, WebElement element, String path) {
 		try {
 			SeleniumHelper.click(_element, element);
@@ -50,6 +56,9 @@ public class FileHelper {
 		}
 	}
 
+	/**
+	 * @author tuan.ngo
+	 */
 	public void downloadFileUsingRobot() {
 		try {
 			Robot robot = new Robot();

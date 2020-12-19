@@ -13,10 +13,24 @@ public enum Station {
 		this.stationName = name;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the station name.
+	 * 
+	 * @return String, the station name
+	 */
 	public String getStationName() {
 		return this.stationName;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the list of 'Station'.
+	 * 
+	 * @return List, the list of 'Station'
+	 */
 	public static List<String> getAllStationName() {
 		List<String> departStations = new ArrayList<String>();
 		departStations.add(Station.DA_NANG.getStationName());

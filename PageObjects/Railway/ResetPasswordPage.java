@@ -49,6 +49,13 @@ public class ResetPasswordPage extends GeneralPage implements ResetPasswordInter
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Fill the new password, the confirm password and token on Reset
+	 *         Password form.
+	 * 
+	 */
 	@Override
 	public void fillResetPasswordForm(String newPassword, String confirmPassword, String token) {
 		// Fill reset password Form
@@ -57,12 +64,26 @@ public class ResetPasswordPage extends GeneralPage implements ResetPasswordInter
 		SeleniumHelper.sendkeys(this.getTxtResetToken(), token);
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Click to the Reset Password button.
+	 * 
+	 * @return SuccessfulRegisteringPage
+	 */
 	@Override
 	public ResetPasswordPage clickResetPassword() {
 		SeleniumHelper.click(_btnResetPassword, this.getBtnResetPassword());
 		return this;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Submit the Reset Password form.
+	 * 
+	 * @return ResetPasswordPage
+	 */
 	@Override
 	public ResetPasswordPage resetPassword(String newPassword, String confirmPassword, String token) {
 		// Submit reset password Form

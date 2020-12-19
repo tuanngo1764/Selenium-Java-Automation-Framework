@@ -6,10 +6,22 @@ public enum DriverType {
 
 	private final String driverType;
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Instantiates a new driver type.
+	 *
+	 */
 	DriverType(final String driverType) {
 		this.driverType = driverType;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the value.
+	 *
+	 */
 	public String getValue() {
 		return driverType;
 	}

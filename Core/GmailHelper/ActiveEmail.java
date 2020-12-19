@@ -18,6 +18,15 @@ import DriverWrapper.DriverManager;
 
 public class ActiveEmail {
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Activate Gmail
+	 * 
+	 * @param mailSubject that "Please confirm your account" or "Please reset your
+	 *                    password"
+	 * @param keyword     the email account
+	 */
 	public static void clickLinkInEmail(String mailSubject, String keyword) {
 		String resetLink = "";
 		try {

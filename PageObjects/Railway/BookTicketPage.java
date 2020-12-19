@@ -65,21 +65,34 @@ public class BookTicketPage extends GeneralPage implements BookTicketInterface {
 		return countTicketsBooked;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Book the ticket.
+	 * 
+	 */
 	@Override
 	public void bookTicket(Ticket ticket) {
 		// Select Depart Date, Depart Station, Seat Type, Ticket Amount, Destination
-		SeleniumHelper.selectByVisibleText(this.getsltDepartDate(), ticket.getDepartDate());
-		SeleniumHelper.selectByVisibleText(this.getsltDepartFrom(), ticket.getDepartFrom());
-		SeleniumHelper.selectByVisibleText(this.getsltSeatType(), ticket.getSeatType());
-		SeleniumHelper.selectByVisibleText(this.getTxtTicketAmount(), ticket.getTicketAmount() + "");
+		SeleniumHelper.selectByVisibleText(_sltDepartDate, this.getsltDepartDate(), ticket.getDepartDate());
+		SeleniumHelper.selectByVisibleText(_sltDepartFrom, this.getsltDepartFrom(), ticket.getDepartFrom());
+		SeleniumHelper.selectByVisibleText(_sltSeatType, this.getsltSeatType(), ticket.getSeatType());
+		SeleniumHelper.selectByVisibleText(_txtTicketAmount, this.getTxtTicketAmount(), ticket.getTicketAmount() + "");
 
 		this.waitForListItemExist(this.getsltArriveAt(), ticket.getArriveAt(), Constant.SHORT_TIME);
-		SeleniumHelper.selectByVisibleText(this.getsltArriveAt(), ticket.getArriveAt());
+		SeleniumHelper.selectByVisibleText(_sltArriveAt, this.getsltArriveAt(), ticket.getArriveAt());
 
 		// Submit book ticket form
 		SeleniumHelper.click(_btnBookTicket, this.getBtnBookTicket());
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Book tickets.
+	 * 
+	 * @return BookTicketPage
+	 */
 	@Override
 	public BookTicketPage bookTickets(int ticketNumber, int addDays) {
 		Ticket ticket = new Ticket();
@@ -91,6 +104,13 @@ public class BookTicketPage extends GeneralPage implements BookTicketInterface {
 		return this;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Book tickets with different depart station.
+	 * 
+	 * @return BookTicketPage
+	 */
 	@Override
 	public BookTicketPage bookTicketsWithDifferentDepartStations(int ticketNumber, int addDays) {
 		Ticket ticket = new Ticket();
@@ -112,6 +132,13 @@ public class BookTicketPage extends GeneralPage implements BookTicketInterface {
 		return this;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Wait for the item is display on screen.
+	 * 
+	 * @return BookTicketPage
+	 */
 	@Override
 	public void waitForListItemExist(WebElement element, String listItemValue, int timeout) {
 		int countSec = 0;

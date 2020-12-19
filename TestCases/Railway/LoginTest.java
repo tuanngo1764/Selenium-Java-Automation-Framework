@@ -17,13 +17,15 @@ public class LoginTest extends TestBase {
 
 	static Logger logger = Logger.getLogger(LoginTest.class);
 
+	/**
+	 * @author tuan.ngo
+	 */
 	@Test
 	public void TC01() throws IOException {
 
 		reports = new ExtentReports(Utilities.initializeReportFile("TC01", Constant.REPORT_NAME), true);
 
 		try {
-			// Start test. Mention test script name
 			logger.info("TC01: Sample test script");
 
 			test = reports.startTest("TC01", "Sample test script");
@@ -45,27 +47,28 @@ public class LoginTest extends TestBase {
 
 		} catch (Throwable t) {
 
-			// Print fail info in HTML report
 			logger.error(t.getMessage());
 			test.log(LogStatus.FAIL, t.getMessage());
 
-			// Take screen shot of page
 			ReportHelper.takeScreenShot(Utilities.initializeReportFile("TC01", Constant.SCREEN_SHOT_NAME));
 
+			logger.info("Snapshot below: "
+					+ test.addScreenCapture(Utilities.initializeReportFile("TC01", Constant.SCREEN_SHOT_NAME)));
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(Utilities.initializeReportFile("TC01", Constant.SCREEN_SHOT_NAME)));
-			// Attach screen shot in HTML report
 			Assert.assertTrue(false, t.getMessage());
 		}
 	}
 
+	/**
+	 * @author tuan.ngo
+	 */
 	@Test
 	public void TC02() throws IOException {
 
 		reports = new ExtentReports(Utilities.initializeReportFile("TC02", Constant.REPORT_NAME), true);
 
 		try {
-			// Start test. Mention test script name
 			logger.info("TC02: Sample test script");
 
 			test = reports.startTest("TC01", "Sample test script");
@@ -87,16 +90,15 @@ public class LoginTest extends TestBase {
 
 		} catch (Throwable t) {
 
-			// Print fail info in HTML report
 			logger.error(t.getMessage());
 			test.log(LogStatus.FAIL, t.getMessage());
 
-			// Take screen shot of page
 			ReportHelper.takeScreenShot(Utilities.initializeReportFile("TC02", Constant.SCREEN_SHOT_NAME));
 
+			logger.info("Snapshot below: "
+					+ test.addScreenCapture(Utilities.initializeReportFile("TC01", Constant.SCREEN_SHOT_NAME)));
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(Utilities.initializeReportFile("TC02", Constant.SCREEN_SHOT_NAME)));
-			// Attach screen shot in HTML report
 			Assert.assertTrue(false, t.getMessage());
 		}
 	}

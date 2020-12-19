@@ -14,6 +14,13 @@ public class TimeTablePage extends GeneralPage implements TimeTableInterface {
 	// Elements
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to the Check Price page.
+	 * 
+	 * @return TicketPricePage
+	 */
 	@Override
 	public TicketPricePage goToCheckPricePage(String departStation, String arriveStation) {
 		By _ticketPrice = By.xpath("//table[@class='MyTable WideTable']//tr//td[.='" + departStation
@@ -25,6 +32,13 @@ public class TimeTablePage extends GeneralPage implements TimeTableInterface {
 		return new TicketPricePage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to the Book Ticket page.
+	 * 
+	 * @return BookTicketPage
+	 */
 	@Override
 	public BookTicketPage goToBookTicketPage(String departStation, String arriveStation) {
 		By _bookTicket = By.xpath("//table[@class='MyTable WideTable']//tr//td[.='" + departStation

@@ -27,17 +27,37 @@ public class LoginPage {
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Fill the username and the password on the Login form.
+	 * 
+	 */
 	public void fillLoginForm(String username, String password) {
 		// Fill login Form
 		SeleniumHelper.sendkeys(this.getTxtUsername(), username);
 		SeleniumHelper.sendkeys(this.getTxtPassword(), password);
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Click to Login button.
+	 * 
+	 * @return GeneralPage
+	 */
 	public GeneralPage clickBtnLogin() {
 		SeleniumHelper.click(_btnLogin, this.getBtnLogin());
 		return new GeneralPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Submit Login form.
+	 * 
+	 * @return GeneralPage
+	 */
 	public GeneralPage login(String username, String password) {
 		// Submit login credentials
 		this.fillLoginForm(username, password);

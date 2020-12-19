@@ -18,11 +18,25 @@ public class TicketPricePage extends GeneralPage implements TicketPriceInterface
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the ticket price header.
+	 * 
+	 * @return String, the ticket price header
+	 */
 	@Override
 	public String getTicketPriceHeader() {
 		return this.getLblTicketPriceHeader().getText();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the ticket price.
+	 * 
+	 * @return String, the ticket price
+	 */
 	@Override
 	public String getTicketPrice(String seatype) {
 		By _ticketPrice = By.xpath(

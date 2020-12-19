@@ -68,55 +68,136 @@ public class GeneralPage {
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the welcome message.
+	 * 
+	 * @return String, the welcome message
+	 * 
+	 */
 	public String getWelcomeMessage() {
 		return this.getLblWelcomeMessage().getText();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Logout.
+	 * 
+	 * @return HomePage
+	 */
 	public HomePage logout() {
 		SeleniumHelper.click(_tabLogout, this.getTabLogout());
 		return new HomePage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Login page.
+	 * 
+	 * @return LoginPage
+	 */
 	public LoginPage goToLoginPage() {
 		SeleniumHelper.click(_tabLogin, this.getTabLogin());
 		return new LoginPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Home page.
+	 * 
+	 * @return HomePage
+	 */
 	public HomePage goToHomePage() {
 		SeleniumHelper.click(_tabHome, this.getTabHome());
 		return new HomePage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Contact page.
+	 * 
+	 * @return ContactPage
+	 * 
+	 */
 	public ContactPage goToContactPage() {
 		SeleniumHelper.click(_tabContact, this.getTabContact());
 		return new ContactPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Register page.
+	 * 
+	 * @return RegisterPage
+	 * 
+	 */
 	public RegisterPage goToRegisterPage() {
 		SeleniumHelper.click(_tabRegister, this.getTabRegister());
 		return new RegisterPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Change password page.
+	 * 
+	 * @return ChangePasswordPage
+	 */
 	public ChangePasswordPage goToChangePasswordPage() {
 		SeleniumHelper.click(_tabChangePassword, this.getTabChangePassword());
 		return new ChangePasswordPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Time Table page.
+	 * 
+	 * @return TimeTablePage
+	 */
 	public TimeTablePage goToTimeTablePage() {
 		SeleniumHelper.click(_tabTimeTable, this.getTabTimeTable());
 		return new TimeTablePage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Ticket Price page.
+	 * 
+	 * @return TicketPricePage
+	 * 
+	 */
 	public TicketPricePage goToTicketPricePage() {
 		SeleniumHelper.click(_tabTicketPrice, this.getTabTicketPrice());
 		return new TicketPricePage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Book Ticket page.
+	 * 
+	 * @return BookTicketPage
+	 */
 	public BookTicketPage goToBookTicketPage() {
 		SeleniumHelper.click(_tabBookTicket, this.getTabBookTicket());
 		return new BookTicketPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to My Ticket page.
+	 * 
+	 * @return MyTicketPage
+	 */
 	public MyTicketPage goToMyTicketPage() {
 		SeleniumHelper.click(_tabMyTicket, this.getTabMyTicket());
 		return new MyTicketPage();

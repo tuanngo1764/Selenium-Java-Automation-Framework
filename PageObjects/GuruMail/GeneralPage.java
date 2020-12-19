@@ -31,18 +31,38 @@ public class GeneralPage {
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Junk Mail Box.
+	 * 
+	 * @return JunkPage
+	 */
 	public JunkPage goToJunkMailBox() {
 		SeleniumHelper.click(_junkMailBox, this.getJunkMailBox());
 		SeleniumHelper.waitForDisplayed(_messagelist, Constant.SHORT_TIME);
 		return new JunkPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Inbox Mail Box.
+	 * 
+	 * @return Inbox
+	 */
 	public InboxPage goToInboxMailBox() {
 		SeleniumHelper.click(_inboxMailBox, this.getInboxMailBox());
 		SeleniumHelper.waitForDisplayed(_messagelist, Constant.SHORT_TIME);
 		return new InboxPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Open the mail in Inbox Mail or Junk Mail Box.
+	 * 
+	 */
 	public void openMail(String mailSubject, String username) {
 		By _mail = By.xpath("//a[.='" + mailSubject + ' ' + username + "']");
 		try {
@@ -60,6 +80,12 @@ public class GeneralPage {
 		}
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Click the link to activate or to reset your account.
+	 * 
+	 */
 	public void clickLinkInEmail(String mailSubject, String username, String keyword) {
 		// Precondition: find and open mail
 		openMail(mailSubject, username);
@@ -73,6 +99,9 @@ public class GeneralPage {
 		SeleniumHelper.click(_link, link);
 	}
 
+	/**
+	 * @author tuan.ngo
+	 */
 	public void clickLinkGuruMail(String mailSubject, String username, String keyword) {
 		try {
 			clickLinkInEmail(mailSubject, username, keyword);

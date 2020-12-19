@@ -33,6 +33,13 @@ public class ChangePasswordPage extends GeneralPage implements ChangePasswordInt
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Fill the password, the new password and the confirm password on the
+	 *         Change password form.
+	 * 
+	 */
 	@Override
 	public void fillChangePasswordForm(String password, String newPassword, String confirmPassword) {
 		// Fill register form
@@ -41,12 +48,26 @@ public class ChangePasswordPage extends GeneralPage implements ChangePasswordInt
 		SeleniumHelper.sendkeys(this.getTxtConfirmPassword(), confirmPassword);
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Click to Register button.
+	 * 
+	 * @return ChangePasswordPage
+	 */
 	@Override
 	public ChangePasswordPage clickBtnRegister() {
 		SeleniumHelper.click(_btnChangePassword, this.getBtnChangePassword());
 		return this;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Change password of your account.
+	 * 
+	 * @return ChangePasswordPage
+	 */
 	@Override
 	public ChangePasswordPage changePassword(String password, String newPassword, String confirmPassword) {
 		// Submit change password form

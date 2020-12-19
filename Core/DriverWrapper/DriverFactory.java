@@ -2,6 +2,7 @@ package DriverWrapper;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,15 +17,31 @@ import Common.DriverType;
 
 public class DriverFactory {
 
+	static final Logger logger = Logger.getLogger(DriverFactory.class.getName());
+
 	private WebDriver webDriver;
 	private static DesiredCapabilities caps;
 
-	DriverFactory(DriverType driverType, boolean parallel, String hub) {
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Instantiates a new driver.
+	 *
+	 * @param driverType the type
+	 * @param parallel   the parallel
+	 * @param hub        the hub
+	 */
+	public DriverFactory(DriverType driverType, boolean parallel, String hub) {
+		logger.info("Create new Driver with type: " + driverType.getValue());
 		System.out.println("Create new Driver with type: " + driverType.getValue());
+
 		switch (driverType.getValue()) {
 		case "Chrome":
+			logger.info("Current thread: " + Thread.currentThread().getId());
 			System.out.println("Current thread: " + Thread.currentThread().getId());
+
 			System.setProperty("webdriver.chrome.driver", Constant.CHROME_DRIVER_PATH);
+
 			if (parallel) {
 				caps = DesiredCapabilities.chrome();
 				try {
@@ -40,8 +57,11 @@ public class DriverFactory {
 			break;
 
 		case "Firefox":
+			logger.info("Current thread: " + Thread.currentThread().getId());
 			System.out.println("Current thread: " + Thread.currentThread().getId());
+
 			System.setProperty("webdriver.gecko.driver", Constant.FIREFOX_DRIVER_PATH);
+
 			if (parallel) {
 				caps = DesiredCapabilities.firefox();
 				try {
@@ -57,8 +77,11 @@ public class DriverFactory {
 			break;
 
 		case "IE":
+			logger.info("Current thread: " + Thread.currentThread().getId());
 			System.out.println("Current thread: " + Thread.currentThread().getId());
+
 			System.setProperty("webdriver.IEDriverServer.driver", Constant.IE_DRIVER_PATH);
+
 			if (parallel) {
 				caps = DesiredCapabilities.internetExplorer();
 				try {
@@ -74,8 +97,11 @@ public class DriverFactory {
 			break;
 
 		case "Edge":
+			logger.info("Current thread: " + Thread.currentThread().getId());
 			System.out.println("Current thread: " + Thread.currentThread().getId());
+
 			System.setProperty("webdriver.msedgedriver.driver", Constant.EDGE_DRIVER_PATH);
+
 			if (parallel) {
 				caps = DesiredCapabilities.edge();
 				try {

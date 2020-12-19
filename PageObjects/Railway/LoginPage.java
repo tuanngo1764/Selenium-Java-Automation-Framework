@@ -38,12 +38,25 @@ public class LoginPage extends GeneralPage implements LoginInterface {
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Go to Forgot Password page.
+	 * 
+	 * @return ForgotPasswordPage
+	 */
 	@Override
 	public ForgotPasswordPage goToForgotPasswordPage() {
 		SeleniumHelper.click(_forgotPasswordLink, this.getForgotPasswordLink());
 		return new ForgotPasswordPage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Fill the email and the password on Login form
+	 * 
+	 */
 	@Override
 	public void fillLoginForm(Account account) {
 		// Fill login Form
@@ -51,12 +64,26 @@ public class LoginPage extends GeneralPage implements LoginInterface {
 		SeleniumHelper.sendkeys(this.getTxtPassword(), account.getPassword());
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Click to the Login button.
+	 * 
+	 * @return HomePage
+	 */
 	@Override
 	public HomePage clickBtnLogin() {
 		SeleniumHelper.click(_btnLogin, this.getBtnLogin());
 		return new HomePage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Submit the login form
+	 * 
+	 * @return HomePage
+	 */
 	@Override
 	public HomePage loginSuccess(Account account) {
 		// Submit login credentials
@@ -66,6 +93,13 @@ public class LoginPage extends GeneralPage implements LoginInterface {
 		return new HomePage();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Submit the Login form.
+	 * 
+	 * @return HomePage
+	 */
 	@Override
 	public LoginPage loginFailed(Account account) {
 		// Submit login Form

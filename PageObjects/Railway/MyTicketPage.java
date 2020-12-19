@@ -48,10 +48,24 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the error message
+	 * 
+	 * @return String, the error message
+	 */
 	public String getErrorMessage() {
 		return getLblErrorMessage().getText();
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Filter the data table by the depart station.
+	 * 
+	 * @return MyTicketPage
+	 */
 	@Override
 	public MyTicketPage filterByDepartStation(String departStation) {
 		SeleniumHelper.sendkeys(this.getCmbDepartStation(), departStation);
@@ -59,6 +73,13 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 		return this;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Filter the data table by the depart date.
+	 * 
+	 * @return MyTicketPage
+	 */
 	@Override
 	public MyTicketPage filterByDepartDate(String departDate) {
 		SeleniumHelper.sendkeys(this.getTxtDepartDateFilter(), departDate);
@@ -66,19 +87,39 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 		return this;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Filter the data table by status.
+	 * 
+	 * @return MyTicketPage
+	 */
 	@Override
 	public MyTicketPage filterByStatus(String status) {
-		SeleniumHelper.selectByVisibleText(this.getCmbStatus(), status);
+		SeleniumHelper.selectByVisibleText(_cmbStatus, this.getCmbStatus(), status);
 		SeleniumHelper.click(_btnApplyFilter, this.getBtnApplyFilter());
 		return this;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Gets the ticket numbers.
+	 * 
+	 * @return int, the ticket numbers
+	 */
 	@Override
 	public Integer getTicketNumber() {
 		return DriverManager.getDriver().findElements(_tblTicketRow).size() - 1;
 	}
 
-	// To cancel ticket booked
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Cancel ticket booked.
+	 * 
+	 * @return MyTicketPage
+	 */
 	@Override
 	public MyTicketPage cancelTicket(Ticket ticket) {
 		By _ticketPrice = By.xpath("//table[@class='MyTable']//tr//td[contains(.,'" + ticket.getDepartFrom()
@@ -99,7 +140,13 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 		return this;
 	}
 
-	// To cancel ticket exist in booked tickets table
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Check the ticket is existed on the table.
+	 * 
+	 * @return Boolean, true if the ticket is existed
+	 */
 	@Override
 	public Boolean checkTicketExist(Ticket ticket) {
 		By _ticket = By.xpath("//table[@class='MyTable']//tr//td[contains(.,'" + ticket.getDepartFrom()
@@ -112,6 +159,13 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 		return DriverManager.getDriver().findElements(_ticket).size() > 0 ? true : false;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Check the ticket is existed on the table by the depart station.
+	 * 
+	 * @return Boolean, true if the ticket is existed
+	 */
 	@Override
 	public Boolean checkFilterByDepartStation(String departStation, int expected) {
 		int row = DriverManager.getDriver()
@@ -122,6 +176,13 @@ public class MyTicketPage extends GeneralPage implements MyTicketInterface {
 		return false;
 	}
 
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Check the ticket is existed on the table by the depart date.
+	 * 
+	 * @return Boolean, true if the ticket is existed
+	 */
 	@Override
 	public Boolean checkFilterByDepartDate(String departDate, int expected) {
 		int row = DriverManager.getDriver().findElements(By.xpath("//table[contains(@class,'MyTable')]//td[.='"

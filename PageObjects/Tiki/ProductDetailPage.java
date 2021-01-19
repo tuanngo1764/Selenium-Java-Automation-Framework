@@ -12,6 +12,12 @@ public class ProductDetailPage extends GeneralPage {
 	private final By _productLable = By.xpath("//div[@id='__next']//div[@class='header']//h1[@class='title']");
 	private final By _buyBtn = By.xpath("//button[@data-view-id='pdp_add_to_cart_button']");
 	private final By _qualityTextbox = By.xpath("//div[@class='qty-and-message']//input");
+	private final By _productCurrentPrice = By
+			.xpath("//div[contains(@class,'product-price')]/span[contains(@class, 'current-price')]");
+	private final By _productListPrice = By
+			.xpath("//div[contains(@class,'product-price')]/span[contains(@class, 'list-price')]");
+	private final By _productDiscountPrice = By
+			.xpath("//div[contains(@class,'product-price')]/span[contains(@class, 'discount-rate')]");
 
 	// Elements
 	protected WebElement getProductLabel() {
@@ -24,6 +30,18 @@ public class ProductDetailPage extends GeneralPage {
 
 	protected WebElement getQualityTextbox() {
 		return DriverManager.getDriver().findElement(_qualityTextbox);
+	}
+
+	protected WebElement getProductCurrentPrice() {
+		return DriverManager.getDriver().findElement(_productCurrentPrice);
+	}
+
+	protected WebElement getProductListPrice() {
+		return DriverManager.getDriver().findElement(_productListPrice);
+	}
+
+	protected WebElement getProductDiscountPrice() {
+		return DriverManager.getDriver().findElement(_productDiscountPrice);
 	}
 
 	// Methods

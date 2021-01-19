@@ -22,14 +22,14 @@ public class SearchAutocompleteModel extends GeneralPage {
 	 * 
 	 *         Choose promo item on Search category
 	 * 
-	 * @return ResultPage
+	 * @return PromotionPage
 	 */
-	public ResultPage chooseItemOnPromoSearch(SearchCategory searchCategory) {
+	public PromotionPage chooseItemOnPromoSearch(SearchCategory searchCategory) {
 		By _productItem = By.xpath(String.format(
 				"//div[contains(@class, 'promo')]/a[@data-view-id='search_suggestion_promo_item' and text()='%s']",
 				searchCategory.getProductName()));
 		SeleniumHelper.click(_productItem, this.getProductItem(_productItem));
-		return new ResultPage();
+		return new PromotionPage();
 	}
 
 	/**
@@ -39,14 +39,14 @@ public class SearchAutocompleteModel extends GeneralPage {
 	 *
 	 * @param index: the position to be selected
 	 * 
-	 * @return ResultPage
+	 * @return PromotionPage
 	 */
-	public ResultPage chooseItemOnPromoSearchByIndex(int index) {
+	public PromotionPage chooseItemOnPromoSearchByIndex(int index) {
 		By _productItem = By.xpath(String.format(
 				"//div[contains(@class, 'promo')]/a[@data-view-id='search_suggestion_promo_item' and @data-view-index='%d']",
 				index));
 		SeleniumHelper.click(_productItem, this.getProductItem(_productItem));
-		return new ResultPage();
+		return new PromotionPage();
 	}
 
 	/**

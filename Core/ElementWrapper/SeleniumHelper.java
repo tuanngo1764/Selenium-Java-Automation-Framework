@@ -1030,8 +1030,8 @@ public class SeleniumHelper {
 	/**
 	 * @author tuan.ngo
 	 */
-	public static void isSelected(By _element) {
-		isSelected(_element, Constant.MEDIUM_TIME);
+	public static boolean isSelected(By _element) {
+		return isSelected(_element, Constant.MEDIUM_TIME);
 	}
 
 	/**
@@ -1058,8 +1058,8 @@ public class SeleniumHelper {
 	/**
 	 * @author tuan.ngo
 	 */
-	public static void isEnabled(By _element) {
-		isEnabled(_element, Constant.MEDIUM_TIME);
+	public static boolean isEnabled(By _element) {
+		return isEnabled(_element, Constant.MEDIUM_TIME);
 	}
 
 	/**

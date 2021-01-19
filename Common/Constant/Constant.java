@@ -8,6 +8,7 @@ public class Constant {
 	public static final String HUB = "http://192.168.1.8:4444/wd/hub";
 
 	// Connect to sites
+	public static final String TIKI_URL = "https://tiki.vn/";
 	public static final String RAILWAY_URL = "http://192.168.171.251:8081/Page/HomePage.cshtml";
 	public static final String GURU_URL = "http://mail.ges.guru/webmail";
 

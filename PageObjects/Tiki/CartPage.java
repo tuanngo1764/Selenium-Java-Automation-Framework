@@ -5,8 +5,9 @@ import org.openqa.selenium.WebElement;
 
 import DriverWrapper.DriverManager;
 import ElementWrapper.SeleniumHelper;
+import Tiki.Interface.CartInterface;
 
-public class CartPage extends GeneralPage {
+public class CartPage extends GeneralPage implements CartInterface {
 
 	// Locators
 	private final By _cartProductCount = By.xpath("//span[@class='cart-products__count']");
@@ -27,6 +28,7 @@ public class CartPage extends GeneralPage {
 	 * 
 	 * @return CartPage
 	 */
+	@Override
 	public CartPage removeProduct(String productName) {
 		By _product = By.xpath(
 				String.format("//a[@class='cart-products__name' and text()='%s']/..//span[@class='cart-products__del']",
@@ -43,6 +45,7 @@ public class CartPage extends GeneralPage {
 	 * 
 	 * @return int
 	 */
+	@Override
 	public int countProductInCart() {
 		return DriverManager.getDriver().findElements(_giftItems).size()
 				+ DriverManager.getDriver().findElements(_cartProducts).size();
@@ -56,6 +59,7 @@ public class CartPage extends GeneralPage {
 	 * 
 	 * @return boolean
 	 */
+	@Override
 	public boolean verifyProductQualityDisplayedCorrectly(int count) {
 		return Integer.parseInt(this.getCartProductCount().getText().trim().split(" ")[1]) == count;
 	}
@@ -68,6 +72,7 @@ public class CartPage extends GeneralPage {
 	 * 
 	 * @return boolean
 	 */
+	@Override
 	public boolean verifyProductQualityInCartCorrectly(int count) {
 		return this.countProductInCart() == count;
 	}

@@ -6,10 +6,12 @@ import org.openqa.selenium.WebElement;
 import Constant.DeliveryType;
 import DriverWrapper.DriverManager;
 import ElementWrapper.SeleniumHelper;
+import Tiki.Interface.ResultInterface;
 
-public class ResultPage extends GeneralPage {
+public class ResultPage extends GeneralPage implements ResultInterface {
 
 	// Locators
+	private final By _productList = By.xpath("//div[@data-view-id='product_list_container']");
 
 	// Elements
 	protected WebElement getSearchSortItem(By _searchSortItem) {
@@ -36,6 +38,7 @@ public class ResultPage extends GeneralPage {
 	 * 
 	 * @return ResultPage
 	 */
+	@Override
 	public ResultPage selectSearchSortType(String sortType) {
 		By _searchSortItem = By.xpath(String.format(
 				"//div[@data-view-id='search_sort_container']//a[@data-view-id='search_sort_item' and text()='%s']",
@@ -53,7 +56,10 @@ public class ResultPage extends GeneralPage {
 	 * 
 	 * @return ResultPage
 	 */
+	@Override
 	public ProductDetailPage selectProductInResultListByIndex(int index) {
+		SeleniumHelper.waitForDisplayed(_productList);
+
 		By _itemOnProductList = By.xpath(String.format(
 				"//div[@data-view-id='product_list_container']//a[@data-view-id='product_list_item' and @data-view-index='%d']",
 				index));
@@ -68,7 +74,10 @@ public class ResultPage extends GeneralPage {
 	 * 
 	 * @return ResultPage
 	 */
+	@Override
 	public ProductDetailPage selectFirstProductInProductList() {
+		SeleniumHelper.waitForDisplayed(_productList);
+
 		By _itemOnProductList = By.xpath(
 				"//div[@data-view-id='product_list_container']//a[@data-view-id='product_list_item' and @data-view-index=0]");
 		SeleniumHelper.click(_itemOnProductList, this.getItemOnProductList(_itemOnProductList));
@@ -82,6 +91,7 @@ public class ResultPage extends GeneralPage {
 	 * 
 	 * @return ResultPage
 	 */
+	@Override
 	public ResultPage selectDeliveryType(DeliveryType deliveryType) {
 		By _deliveryOption = By
 				.xpath(String.format("//label[@data-view-id='search_checkbox_filter_item']//span[text()='%s']/..",
@@ -97,6 +107,7 @@ public class ResultPage extends GeneralPage {
 	 * 
 	 * @return ResultPage
 	 */
+	@Override
 	public boolean verifySearchSortTypeIsSelected(String sortName) {
 		By _searchSortItem = By.xpath(String.format(
 				"//div[@data-view-id='search_sort_container']//a[@data-view-id='search_sort_item' and text()='%s']",
@@ -112,6 +123,7 @@ public class ResultPage extends GeneralPage {
 	 * 
 	 * @return ResultPage
 	 */
+	@Override
 	public boolean verifyDeliveryTypeIsSelected(DeliveryType deliveryType) {
 		By _deliveryOptionCheckbox = By.xpath(
 				String.format("//label[@data-view-id='search_checkbox_filter_item']//span[text()='%s']/..//input",

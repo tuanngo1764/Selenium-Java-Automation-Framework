@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import Constant.LeftPanel;
+import Constant.SearchCategory;
 import DriverWrapper.DriverManager;
 import ElementWrapper.SeleniumHelper;
 
@@ -14,6 +15,7 @@ public class GeneralPage {
 	private final By _searchBtn = By.xpath("//div[@id='__next']//button[@data-view-id='main_search_form_button']");
 
 	// Cart notification
+	private final By _cartNotification = By.xpath("//div[contains(@class, 'CartNotification')]");
 	private final By _vewAndPaymentBtnOnCartNotification = By
 			.xpath("//div[@data-view-id='header_user_shortcut_cart']//a[@href='/checkout/cart']");
 	private final By _titleResult = By.xpath(
@@ -90,6 +92,10 @@ public class GeneralPage {
 		return DriverManager.getDriver().findElement(_cancelBtnOnOfferDialog);
 	}
 
+	protected WebElement getProductItem(By _productItem) {
+		return DriverManager.getDriver().findElement(_productItem);
+	}
+
 	// Methods
 	/**
 	 * @author tuan.ngo
@@ -128,6 +134,36 @@ public class GeneralPage {
 		// Enter value to search box
 		// Click to search button
 		SeleniumHelper.click(_searchBtn, this.getSearchBtn());
+		return new ResultPage();
+	}
+
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Choose quick item on Search category
+	 * 
+	 * @return ResultPage
+	 */
+	public ResultPage chooseItemOnQuickSearch(SearchCategory searchCategory) {
+		By _productItem = By.xpath(String.format("//a[@data-view-id='header_quicklinks_item' and text()='%s']",
+				searchCategory.getProductName()));
+		SeleniumHelper.click(_productItem, this.getProductItem(_productItem));
+		return new ResultPage();
+	}
+
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Choose quick item on Search category
+	 * 
+	 * @param index: the position to be selected
+	 * 
+	 * @return ResultPage
+	 */
+	public ResultPage chooseItemOnQuickSearchByIndex(int index) {
+		By _productItem = By.xpath(
+				String.format("//a[@data-view-id='header_quicklinks_item' and @data-view-index='%d']", index - 1));
+		SeleniumHelper.click(_productItem, this.getProductItem(_productItem));
 		return new ResultPage();
 	}
 
@@ -235,6 +271,7 @@ public class GeneralPage {
 	 * @return CartPage
 	 */
 	public CartPage clickToViewAndPaymentBtn() {
+		SeleniumHelper.waitForDisplayed(_cartNotification);
 		SeleniumHelper.click(_vewAndPaymentBtnOnCartNotification, this.getVewAndPaymentBtnOnCartNotification());
 		return new CartPage();
 	}
@@ -247,6 +284,7 @@ public class GeneralPage {
 	 * @return GeneralPage
 	 */
 	public GeneralPage clickToCloseBtnOnCartNotification() {
+		SeleniumHelper.waitForDisplayed(_cartNotification);
 		SeleniumHelper.click(_closeBtnOnCartNotification, this.getCloseBtnOnCartNotification());
 		return this;
 	}
@@ -259,7 +297,7 @@ public class GeneralPage {
 	 * @return GeneralPage
 	 */
 	public GeneralPage clickToAllowBtnOnOfferDialog() {
-		SeleniumHelper.waitForInvisible(_offerDialog);
+		SeleniumHelper.waitForDisplayed(_offerDialog);
 		SeleniumHelper.click(_allowBtnOnOfferDialog, this.getAllowBtnOnOfferDialog());
 		return this;
 	}
@@ -272,7 +310,7 @@ public class GeneralPage {
 	 * @return GeneralPage
 	 */
 	public GeneralPage clickToCancelBtnOnOfferDialog() {
-		SeleniumHelper.waitForInvisible(_offerDialog);
+		SeleniumHelper.waitForDisplayed(_offerDialog);
 		SeleniumHelper.click(_cancelBtnOnOfferDialog, this.getCancelBtnOnOfferDialog());
 		return this;
 	}
@@ -296,6 +334,8 @@ public class GeneralPage {
 	 * @return boolean
 	 */
 	public boolean verifyCartNotificationDisplayedCorrectly(String message) {
+		SeleniumHelper.waitForDisplayed(_cartNotification);
+
 		return this.getCartNotificationStatus().getText().trim().equals(message);
 	}
 }

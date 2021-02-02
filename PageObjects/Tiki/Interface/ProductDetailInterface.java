@@ -19,4 +19,6 @@ public interface ProductDetailInterface {
 	ProductDetailPage buyProduct(String color, String capacity, int quality);
 
 	boolean verifyProductNameDisplayedCorrectly(String productName);
+
+	boolean verifyProductPriceDisplayedCorrectly(String productPrice);
 }

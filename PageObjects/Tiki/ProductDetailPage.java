@@ -10,7 +10,7 @@ import Tiki.Interface.ProductDetailInterface;
 public class ProductDetailPage extends GeneralPage implements ProductDetailInterface {
 
 	// Locators
-	private final By _productLable = By.xpath("//div[@id='__next']//div[@class='header']//h1[@class='title']");
+	private final By _productNameLable = By.xpath("//div[@id='__next']//div[@class='header']//h1[@class='title']");
 	private final By _buyBtn = By.xpath("//button[@data-view-id='pdp_add_to_cart_button']");
 	private final By _qualityTextbox = By.xpath("//div[@class='qty-and-message']//input");
 	private final By _productCurrentPrice = By
@@ -21,8 +21,8 @@ public class ProductDetailPage extends GeneralPage implements ProductDetailInter
 			.xpath("//div[contains(@class,'product-price')]/span[contains(@class, 'discount-rate')]");
 
 	// Elements
-	protected WebElement getProductLabel() {
-		return DriverManager.getDriver().findElement(_productLable);
+	protected WebElement getProductNameLabel() {
+		return DriverManager.getDriver().findElement(_productNameLable);
 	}
 
 	protected WebElement getBuyBtn() {
@@ -173,6 +173,21 @@ public class ProductDetailPage extends GeneralPage implements ProductDetailInter
 	 */
 	@Override
 	public boolean verifyProductNameDisplayedCorrectly(String productName) {
-		return this.getProductLabel().getText().trim().equals(productName);
+		SeleniumHelper.waitForDisplayed(_productNameLable);
+
+		return this.getProductNameLabel().getText().trim().equals(productName);
+	}
+
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Verify the product's price is displayed correctly
+	 * 
+	 * @return boolean
+	 */
+	@Override
+	public boolean verifyProductPriceDisplayedCorrectly(String productPrice) {
+		
+		return this.getProductCurrentPrice().getText().trim().equals(productPrice);
 	}
 }

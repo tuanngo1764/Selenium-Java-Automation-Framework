@@ -1,10 +1,14 @@
 package Tiki;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import Constant.LeftPanel;
+import Constant.ProductPortfolio;
 import Constant.SearchCategory;
+import Constant.Supplier;
 import DriverWrapper.DriverManager;
 import ElementWrapper.SeleniumHelper;
 
@@ -14,12 +18,24 @@ public class GeneralPage {
 	private final By _searchTextBox = By.xpath("//div[@id='__next']//input[@data-view-id='main_search_form_input']");
 	private final By _searchBtn = By.xpath("//div[@id='__next']//button[@data-view-id='main_search_form_button']");
 
+	// Breadcrumb & result's title
+	private final By _breadCrumbs = By.xpath(
+			"//div[@id='__next']//div[@class='breadcrumb']//a[@data-view-id='product_list_top_categories_item']");
+
+	private final By _titleResult = By
+			.xpath("//div[@id='__next']//div[@class='search-summary']//div[@class='title']//h1");
+
+	// Price Range
+	private final By _minPriceRangeTextbox = By.xpath(
+			"//div[contains(@class,'CategoryViewstyle')]//div[@class='input-group']/input[@placeholder='Giá từ']");
+	private final By _maxPriceRangeTextbox = By.xpath(
+			"//div[contains(@class,'CategoryViewstyle')]//div[@class='input-group']/input[@placeholder='Giá đến']");
+	private final By _filterPriceRangeBtn = By.xpath("//button[@data-view-id='search_filter_submit_button']");
+
 	// Cart notification
 	private final By _cartNotification = By.xpath("//div[contains(@class, 'CartNotification')]");
 	private final By _vewAndPaymentBtnOnCartNotification = By
 			.xpath("//div[@data-view-id='header_user_shortcut_cart']//a[@href='/checkout/cart']");
-	private final By _titleResult = By.xpath(
-			"//div[@id='__next']//div[@class='breadcrumb']//a[@data-view-id='product_list_top_categories_item']/span");
 	private final By _cartNotificationStatus = By
 			.xpath("//div[@data-view-id='header_user_shortcut_cart']//p[@class='status']");
 	private final By _closeBtnOnCartNotification = By
@@ -40,6 +56,18 @@ public class GeneralPage {
 			.xpath("//div[contains(@class, 'logo-menu')]//a[contains(@class,'Menu-button')]");
 
 	// Elements
+	protected WebElement getMinPriceRangeTextbox() {
+		return DriverManager.getDriver().findElement(_minPriceRangeTextbox);
+	}
+
+	protected WebElement getMaxPriceRangeTextbox() {
+		return DriverManager.getDriver().findElement(_maxPriceRangeTextbox);
+	}
+
+	protected WebElement getFfilterPriceRangeBtn() {
+		return DriverManager.getDriver().findElement(_filterPriceRangeBtn);
+	}
+
 	protected WebElement getSearchBtn() {
 		return DriverManager.getDriver().findElement(_searchBtn);
 	}
@@ -97,6 +125,32 @@ public class GeneralPage {
 	}
 
 	// Methods
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Get the "breadcrumb" value
+	 * 
+	 * @return String, the "breadscumb value
+	 */
+	public String getBreadCrumb(String searchValue) {
+		SeleniumHelper.waitForDisplayed(_breadCrumbs);
+
+		List<WebElement> breadcrumbs = DriverManager.getDriver().findElements(_breadCrumbs);
+		String result = "";
+
+		if (breadcrumbs.size() > 0) {
+			for (WebElement breadcrumb : breadcrumbs) {
+				result += breadcrumb.getText().trim();
+				if (breadcrumb.getText().trim().equals(searchValue))
+					break;
+				result += " > ";
+			}
+		}
+
+//		System.out.print("breadscrumb: " + result);
+		return result;
+	}
+
 	/**
 	 * @author tuan.ngo
 	 * 
@@ -235,19 +289,43 @@ public class GeneralPage {
 	/**
 	 * @author tuan.ngo
 	 * 
+	 *         Click item to the item in the Product portfolio
+	 * 
+	 * @return ResultPage
+	 */
+	public ResultPage clickToItemInProductPortfolio(ProductPortfolio productPortfolio) {
+		By _productPortfolioItem = By.xpath(String.format(
+				"//div[contains(@class, 'CategoryViewstyle')]//div[@data-view-label='Danh Mục Sản Phẩm']//a[@data-view-id='search_filter_item' and text()='%s']",
+				productPortfolio.getProductName()));
+
+		SeleniumHelper.waitForClickable(_productPortfolioItem);
+
+		WebElement leftPanelItem = DriverManager.getDriver().findElement(_productPortfolioItem);
+
+		// Click item to left panel
+		SeleniumHelper.click(_productPortfolioItem, leftPanelItem);
+		return new ResultPage();
+	}
+
+	/**
+	 * @author tuan.ngo
+	 * 
 	 *         Click item to the item in the Left panel
 	 * 
-	 * @return FilteredPage
+	 * @return ResultPage
 	 */
-	public FilteredPage clickToItemInLeftPanel(LeftPanel leftPanel) {
+	public ResultPage clickToItemInLeftPanel(LeftPanel leftPanel) {
 		By _leftPanelItem = By
 				.xpath("//div[@id='__next']//div[@data-view-id='main_navigation_item' and @data-view-label='"
 						+ leftPanel.getProductName() + "']/..");
+
+		SeleniumHelper.waitForDisplayed(_leftPanelItem);
+
 		WebElement leftPanelItem = DriverManager.getDriver().findElement(_leftPanelItem);
 
 		// Click item to left panel
-		SeleniumHelper.click(_leftPanelItem, leftPanelItem);
-		return new FilteredPage();
+		SeleniumHelper.doubleClickByJSExecutor(_leftPanelItem, leftPanelItem);
+		return new ResultPage();
 	}
 
 	/**
@@ -309,10 +387,73 @@ public class GeneralPage {
 	 * 
 	 * @return GeneralPage
 	 */
-	public GeneralPage clickToCancelBtnOnOfferDialog() {
+	public HomePage clickToCancelBtnOnOfferDialog() {
 		SeleniumHelper.waitForDisplayed(_offerDialog);
 		SeleniumHelper.click(_cancelBtnOnOfferDialog, this.getCancelBtnOnOfferDialog());
-		return this;
+		SeleniumHelper.waitForInvisible(_offerDialog);
+		return new HomePage();
+	}
+
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Enter price range, then select OK button
+	 * 
+	 * @return ResultPage
+	 */
+	public ResultPage selectPriceRange(String minPriceRange, String maxPriceRange) {
+
+		SeleniumHelper.waitForDisplayed(_minPriceRangeTextbox);
+
+		SeleniumHelper.sendkeys(this.getMinPriceRangeTextbox(), minPriceRange);
+		SeleniumHelper.sendkeys(this.getMaxPriceRangeTextbox(), maxPriceRange);
+		SeleniumHelper.click(_filterPriceRangeBtn, this.getFfilterPriceRangeBtn());
+
+		SeleniumHelper.waitForPageLoaded();
+		return new ResultPage();
+	}
+
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         select the Supplier
+	 * 
+	 * @return ResultPage
+	 */
+	public ResultPage selectSupplier(Supplier supplier) {
+		By _supplierItem = By.xpath(String.format(
+				"//div[contains(@class, 'CategoryViewstyle')]//div[@data-view-label='Nhà cung cấp']//a[@data-view-id='search_filter_item' and text()='%s']",
+				supplier.getSupplierName()));
+
+		SeleniumHelper.waitForDisplayed(_supplierItem);
+
+		WebElement leftPanelItem = DriverManager.getDriver().findElement(_supplierItem);
+
+		// Click item to left panel
+		SeleniumHelper.doubleClickByJSExecutor(_supplierItem, leftPanelItem);
+		return new ResultPage();
+	}
+
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Verify the "Search" button is displayed
+	 * 
+	 * @return boolean
+	 */
+	public boolean verifySearchBtnDisplayed() {
+		return this.getSearchBtn().isDisplayed();
+	}
+
+	/**
+	 * @author tuan.ngo
+	 * 
+	 *         Verify the "Search" text box is displayed
+	 * 
+	 * @return boolean
+	 */
+	public boolean verifySearchTextboxDisplayed() {
+		return this.getSearchTextBox().isDisplayed();
 	}
 
 	/**
@@ -323,7 +464,12 @@ public class GeneralPage {
 	 * @return boolean
 	 */
 	public boolean verifySearchTitleDisplayedCorrectly(String title) {
-		return this.getTitleResult().getText().trim().equals(title);
+		SeleniumHelper.waitForPageLoaded();
+		SeleniumHelper.waitForDisplayed(_titleResult);
+
+		String resultTitle = String.format("Kết quả tìm kiếm cho `%s`", title);
+
+		return this.getTitleResult().getText().trim().equals(resultTitle);
 	}
 
 	/**

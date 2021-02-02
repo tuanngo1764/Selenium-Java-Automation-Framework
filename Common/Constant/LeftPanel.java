@@ -2,7 +2,7 @@ package Constant;
 
 public enum LeftPanel {
 
-	LAPTOP_IT_DEVICE("Laptop - Thiết bị IT");
+	LAPTOP_IT_DEVICE("Laptop - Thiết bị IT"), ELECTRIC_APPLIANCES("Điện Gia Dụng");
 
 	private final String productName;
 

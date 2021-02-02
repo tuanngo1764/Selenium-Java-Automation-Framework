@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Tiki.TikiTest">
+      <class name="Tiki.Sel2_Tiki_Test">
         <methods>
+          <include name="TC_002"/>
           <include name="afterMethod"/>
-          <include name="TC_TK01"/>
           <include name="beforeMethod"/>
         </methods>
-      </class> <!-- Tiki.TikiTest -->
+      </class> <!-- Tiki.Sel2_Tiki_Test -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

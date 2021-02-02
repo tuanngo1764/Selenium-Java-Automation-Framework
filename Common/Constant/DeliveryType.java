@@ -2,7 +2,7 @@ package Constant;
 
 public enum DeliveryType {
 
-	INTERNATIONAL_PRODUCT("Hàng quốc tế");
+	TIKI_GIAO_NAHNH("Giao nhanh"), INTERNATIONAL_PRODUCT("Hàng quốc tế");
 
 	private final String deliveryType;
 

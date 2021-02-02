@@ -26,34 +26,36 @@ public class FileHelper {
 	 * @author tuan.ngo
 	 */
 	public void uploadFileUsingRobot(By _element, WebElement element, String path) {
+		SeleniumHelper.click(_element, element);
+
 		try {
-			SeleniumHelper.click(_element, element);
-
-			try {
-				Thread.sleep(Constant.TIME_SLEEP);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-			StringSelection strSelection = new StringSelection(path);
-			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-			clipboard.setContents(strSelection, null);
-
-			Robot robot = new Robot();
-
-			robot.keyPress(KeyEvent.VK_CONTROL);
-			robot.keyPress(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_CONTROL);
-
-			robot.delay(Constant.TIME_SLEEP);
-			robot.keyPress(KeyEvent.VK_ENTER);
-			robot.keyRelease(KeyEvent.VK_ENTER);
-
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
+			Thread.sleep(Constant.TIME_SLEEP);
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+
+		StringSelection strSelection = new StringSelection(path);
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(strSelection, null);
+
+		Robot robot = null;
+
+		try {
+			robot = new Robot();
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
+
+		robot.delay(250);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.delay(250);
+		robot.keyRelease(KeyEvent.VK_ENTER);
 	}
 
 	/**
